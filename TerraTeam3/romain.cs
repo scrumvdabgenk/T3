@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
-    class Program
+    class romain
     {
-        static void Main(string[] args)
-        {
-            // trakakaka
-
-        }
     }
 }
