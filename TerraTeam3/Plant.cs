@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
-    class romain
+    public class Plant:MatrixItem
     {
-        // gfdg
     }
 }
