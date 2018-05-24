@@ -65,13 +65,42 @@ namespace TerraTeam3
             {
                 kolomTeller++;
 
-                Console.Write(item.Symbool);
+                Console.Write(item.Symbool + "  ");
                 if (kolomTeller == aantalKolommen)
                 {
                     Console.WriteLine();
                     kolomTeller = 0;
                 }
             }
+        }
+
+        public MatrixItem GeefBuurmanRechts(MatrixItem startItem)
+        {
+            var volgendItem = (from item in Items
+                               where item.PosY == startItem.PosY + 1 && item.PosX == startItem.PosX
+                               select item).FirstOrDefault();
+            return volgendItem;
+        }
+
+        public List<MatrixItem> GeefGesorteerdeLijst()
+        {
+            var lijstTerugTegeven = (from item in Items
+                                     orderby item.PosX, item.PosY
+                                     select item).ToList();
+            return lijstTerugTegeven;
+        }
+
+        public void BeweegNaarRechts(MatrixItem startItem, MatrixItem eindItem)
+        {
+            LeegItem nieuwLeegItem = new LeegItem();
+            nieuwLeegItem.PosX = startItem.PosX;
+            nieuwLeegItem.PosY = startItem.PosY;
+
+            startItem.PosX = eindItem.PosX;
+            startItem.PosY = eindItem.PosY;
+            
+            Items.Remove(eindItem);
+            Items.Add(nieuwLeegItem);                        
         }
     }
 }
