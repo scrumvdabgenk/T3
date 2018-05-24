@@ -15,6 +15,7 @@ namespace TerraTeam3
             var aantalCarnivoren = 6;
 
             Matrix mijnMatrix = new Matrix(6, 6);
+
             for (var lus = 0;lus<=aantalPlanten;lus++ )
             {
                 Plant toeTeVoegenPlant = new Plant();
@@ -31,6 +32,11 @@ namespace TerraTeam3
                 mijnMatrix.VoegItemToe(toeTeVoegenCarnivoor);
             }
 
+
+            foreach (MatrixItem mijnItem in mijnMatrix.Items) 
+            {
+                Console.WriteLine(mijnItem.Naam+ " - "+mijnItem.PosX.ToString() + " - " + mijnItem.PosY.ToString());
+            }
         }
     }
 }
