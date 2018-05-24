@@ -8,5 +8,10 @@ namespace TerraTeam3
 {
     public class LeegItem: MatrixItem
     {
+        public LeegItem(string naam)
+        {
+            this.Naam = naam;
+            this.Symbool = 'L';
+        }
     }
 }

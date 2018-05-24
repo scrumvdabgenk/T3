@@ -8,6 +8,11 @@ namespace TerraTeam3
 {
     public class Herbivoor: Fauna
     {
-        
+        public Herbivoor(string naam)
+        {
+            this.Naam = naam;
+            this.Symbool = 'H';
+            // LEVENSKRACHT STARTWAARDE?
+        }
     }
 }
