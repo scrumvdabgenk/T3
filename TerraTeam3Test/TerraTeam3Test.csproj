@@ -54,12 +54,16 @@
   <ItemGroup>
     <Compile Include="UnitTestCarnivoor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitTestFauna.cs" />
     <Compile Include="UnitTestHerbivoor.cs" />
     <Compile Include="UnitTestLeegItem.cs" />
-    <Compile Include="UnitTestMatrixItem.cs" />
     <Compile Include="UnitTestPlant.cs" />
     <Compile Include="UnitTestProgram.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TerraTeam3\TerraTeam3.csproj">
+      <Project>{4f0c74d5-8abd-4ccb-8ee2-936b4dd9e74e}</Project>
+      <Name>TerraTeam3</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

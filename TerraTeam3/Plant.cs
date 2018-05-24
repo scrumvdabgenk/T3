@@ -8,5 +8,10 @@ namespace TerraTeam3
 {
     public class Plant:MatrixItem
     {
+        public Plant(string naam)
+        {
+            this.Naam = naam;
+            this.Symbool = 'P';
+        }
     }
 }
