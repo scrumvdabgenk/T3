@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraTeam3", "TerraTeam3\TerraTeam3.csproj", "{4F0C74D5-8ABD-4CCB-8EE2-936B4DD9E74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraTeam3Test", "TerraTeam3Test\TerraTeam3Test.csproj", "{92A67AC3-D85B-4FA8-A02F-016F8A44C6C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TerraTeam3Test", "TerraTeam3Test\TerraTeam3Test.csproj", "{1E11BE21-3D11-4743-B1B3-FC4E04738170}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4F0C74D5-8ABD-4CCB-8EE2-936B4DD9E74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F0C74D5-8ABD-4CCB-8EE2-936B4DD9E74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F0C74D5-8ABD-4CCB-8EE2-936B4DD9E74E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92A67AC3-D85B-4FA8-A02F-016F8A44C6C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92A67AC3-D85B-4FA8-A02F-016F8A44C6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92A67AC3-D85B-4FA8-A02F-016F8A44C6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92A67AC3-D85B-4FA8-A02F-016F8A44C6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E11BE21-3D11-4743-B1B3-FC4E04738170}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E11BE21-3D11-4743-B1B3-FC4E04738170}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E11BE21-3D11-4743-B1B3-FC4E04738170}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E11BE21-3D11-4743-B1B3-FC4E04738170}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

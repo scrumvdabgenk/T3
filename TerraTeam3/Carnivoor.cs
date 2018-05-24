@@ -6,12 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
-    class Program
+    public class Carnivoor:Fauna
     {
-        static void Main(string[] args)
-        {
-            // trakakaka
-            // David test
-        }
     }
 }

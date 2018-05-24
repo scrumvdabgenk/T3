@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{92A67AC3-D85B-4FA8-A02F-016F8A44C6C2}</ProjectGuid>
+    <ProjectGuid>{1E11BE21-3D11-4743-B1B3-FC4E04738170}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TerraTeam3Test</RootNamespace>
@@ -45,19 +45,21 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="MatrixItemTest.cs" />
+    <Compile Include="UnitTestCarnivoor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\TerraTeam3\TerraTeam3.csproj">
-      <Project>{4f0c74d5-8abd-4ccb-8ee2-936b4dd9e74e}</Project>
-      <Name>TerraTeam3</Name>
-    </ProjectReference>
+    <Compile Include="UnitTestFauna.cs" />
+    <Compile Include="UnitTestHerbivoor.cs" />
+    <Compile Include="UnitTestLeegItem.cs" />
+    <Compile Include="UnitTestMatrixItem.cs" />
+    <Compile Include="UnitTestPlant.cs" />
+    <Compile Include="UnitTestProgram.cs" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

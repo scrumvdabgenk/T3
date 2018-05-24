@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
-    class Program
+    public class Fauna:MatrixItem
     {
-        static void Main(string[] args)
-        {
-            // trakakaka
-            // David test
-        }
+        public int Levenskracht { get; set; }
+
     }
 }
