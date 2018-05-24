@@ -10,7 +10,25 @@ namespace TerraTeam3
     {
         public string Naam { get; set; }
         public char Symbool { get; set; }
-        public int PosX { get; set; }
+        private int valuePosX;
+        public int PosX
+        {
+            get
+            {
+                return valuePosX;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    PosX = 0;
+                }
+                else
+                {
+                    valuePosX = value;
+                }
+            }
+        }
         public int PosY { get; set; }
 
     }
