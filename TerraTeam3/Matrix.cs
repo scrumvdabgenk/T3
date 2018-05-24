@@ -12,6 +12,7 @@ namespace TerraTeam3
         private int aantalKolommen;
         private int aantalPosities;
         public List<MatrixItem> Items = new List<MatrixItem>();
+        Random rnd = new Random();
 
         public Matrix(int aantalRijen, int aantalKolommen)
         {
@@ -27,6 +28,7 @@ namespace TerraTeam3
                     leegItem.PosY = y;
                     leegItem.Naam = "." + "_" + x + "_" + y;
                     VulMatrixToe(leegItem);
+
                 }
             }
         }
@@ -37,16 +39,13 @@ namespace TerraTeam3
                                           where item.Symbool == '.'
                                           select item).ToList();
 
-            Random rnd = new Random();
-
-            var randomGeselecteerdItem = leegItems[rnd.Next(leegItems.Count())];
+            var randomGeselecteerdItem = leegItems[rnd.Next(0, leegItems.Count())];
 
             matrixItem.PosX = randomGeselecteerdItem.PosX;
             matrixItem.PosY = randomGeselecteerdItem.PosY;
 
             Items.Remove(randomGeselecteerdItem);
             Items.Add(matrixItem);
-
         }
 
         public void VulMatrixToe(MatrixItem matrixItem)
@@ -54,14 +53,24 @@ namespace TerraTeam3
             Items.Add(matrixItem);
         }
 
-        public void geefPosRechts(MatrixItem item)
+        public void GeefWeer()
         {
-            if (item.PosX < aantalKolommen)
+            List<MatrixItem> weerTeGevenItems = (from item in Items
+                                                 orderby item.PosX, item.PosY
+                                                 select item).ToList();
+
+            var kolomTeller = 0;
+
+            foreach (var item in weerTeGevenItems)
             {
-                int huidigeX = item.PosX;
-                int huidigeY = item.PosY;
-                int xRechts = huidigeX + 1;
-                int yRechts = huidigeY;
+                kolomTeller++;
+
+                Console.Write(item.Symbool);
+                if (kolomTeller == aantalKolommen)
+                {
+                    Console.WriteLine();
+                    kolomTeller = 0;
+                }
             }
         }
     }

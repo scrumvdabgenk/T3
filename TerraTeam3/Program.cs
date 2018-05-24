@@ -14,12 +14,13 @@ namespace TerraTeam3
             var aantalHerbivoren = 6;
             var aantalCarnivoren = 6;
 
-            Matrix mijnMatrix = new Matrix(6, 6);
+            Matrix mijnMatrix = new Matrix(12, 12);
 
-            for (var lus = 0;lus<=aantalPlanten;lus++ )
+
+            for (var lus = 0; lus <= aantalPlanten; lus++)
             {
                 var toeTeVoegenPlant = new Plant();
-                mijnMatrix.VoegItemToe(toeTeVoegenPlant); 
+                mijnMatrix.VoegItemToe(toeTeVoegenPlant);
             }
             for (var lus = 0; lus <= aantalHerbivoren; lus++)
             {
@@ -33,10 +34,26 @@ namespace TerraTeam3
             }
 
 
-            foreach (MatrixItem mijnItem in mijnMatrix.Items) 
-            {
-                Console.WriteLine(mijnItem.Naam+ " - "+mijnItem.PosX.ToString() + " - " + mijnItem.PosY.ToString());
-            }
-        }
-    }
+            // mijnMatrix.GeefWeer();
+
+            //for (var x = 0; x < aantalRijen; x++)
+            //{
+            //    for (var y = 0; y < aantalKolommen; y++)
+            //    {
+            //        var geselecteerditem(x,y);
+
+            //        if (geselecteerditem.symbool == "h" && matrix.objectRechts(geselecteerditem).symbool == "p")
+            //        {
+            //            eet();
+            //        }
+
+            //        if (geselecteerditem.symbool == "c" && matrix.objectRechts(geselecteerditem).symbool == "c")
+            //        {
+            //            vecht();
+            //        }
+
+            //    }
+            //}
+
+        }        }
 }
