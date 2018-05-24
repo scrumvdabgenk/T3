@@ -8,16 +8,16 @@ namespace TerraTeam3
 {
     public class Carnivoor:Fauna
     {
-        public Carnivoor(string naam)
+        public Carnivoor(string naam): base()
         {
             this.Naam = naam;
             this.Symbool = 'C';
-            // this.Levenskracht = levenskracht;    STARTWAARDE TE CHECKEN MET KLANT
+            
         }
-        public Carnivoor()
+        public Carnivoor():base()
         {
             this.Symbool = 'C';
-            // this.Levenskracht = levenskracht;    STARTWAARDE TE CHECKEN MET KLANT
+            
         }
 
     }

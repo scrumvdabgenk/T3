@@ -8,16 +8,14 @@ namespace TerraTeam3
 {
     public class Herbivoor: Fauna
     {
-        public Herbivoor(string naam)
+        public Herbivoor(string naam) : base()
         {
             this.Naam = naam;
             this.Symbool = 'H';
-            // LEVENSKRACHT STARTWAARDE?
         }
-        public Herbivoor()
+        public Herbivoor():base()
         {
             this.Symbool = 'H';
-            // LEVENSKRACHT STARTWAARDE?
         }
 
     }

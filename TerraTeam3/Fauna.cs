@@ -8,8 +8,15 @@ namespace TerraTeam3
 {
     public abstract class Fauna:MatrixItem
     {
-        private bool actieUitgevoerdValue;
         public int Levenskracht { get; set; }
-        public bool ActieUitgevoerd { get { return actieUitgevoerdValue; } set { actieUitgevoerdValue = false; } } 
+        public bool ActieUitgevoerd { get; set; }
+
+        public Fauna()
+        {
+            this.Levenskracht = 0;
+            this.ActieUitgevoerd = false;
+        }
     }
+
+
 }
