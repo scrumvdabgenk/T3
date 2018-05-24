@@ -11,7 +11,7 @@ namespace TerraTeam3
         private int aantalRijen;
         private int aantalKolommen;
         private int aantalPosities;
-        public List<MatrixItem> Items; 
+        public List<MatrixItem> Items = new List<MatrixItem>();
 
         public Matrix(int aantalRijen, int aantalKolommen)
         {
@@ -25,7 +25,7 @@ namespace TerraTeam3
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
                     leegItem.PosY = y;
-                    leegItem.Naam = "."+"_" + x +"_"+ y;
+                    leegItem.Naam = "." + "_" + x + "_" + y;
                     VulMatrixToe(leegItem);
                 }
             }
@@ -33,9 +33,9 @@ namespace TerraTeam3
 
         public void VoegItemToe(MatrixItem matrixItem)
         {
-            List<MatrixItem> leegItems =( from item in Items
-                            where item.Symbool == '.'
-                            select item).ToList();
+            List<MatrixItem> leegItems = (from item in Items
+                                          where item.Symbool == '.'
+                                          select item).ToList();
 
             Random rnd = new Random();
 
@@ -52,6 +52,17 @@ namespace TerraTeam3
         public void VulMatrixToe(MatrixItem matrixItem)
         {
             Items.Add(matrixItem);
+        }
+
+        public void geefPosRechts(MatrixItem item)
+        {
+            if (item.PosX < aantalKolommen)
+            {
+                int huidigeX = item.PosX;
+                int huidigeY = item.PosY;
+                int xRechts = huidigeX + 1;
+                int yRechts = huidigeY;
+            }
         }
     }
 }
