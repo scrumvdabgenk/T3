@@ -14,5 +14,11 @@ namespace TerraTeam3
             this.Symbool = 'H';
             // LEVENSKRACHT STARTWAARDE?
         }
+        public Herbivoor()
+        {
+            this.Symbool = 'H';
+            // LEVENSKRACHT STARTWAARDE?
+        }
+
     }
 }

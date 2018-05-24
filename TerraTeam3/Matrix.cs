@@ -25,7 +25,7 @@ namespace TerraTeam3
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
                     leegItem.PosY = y;
-                    leegItem.Naam = "l"+"_" + x +"_"+ y;
+                    leegItem.Naam = "."+"_" + x +"_"+ y;
                     VulMatrixToe(leegItem);
                 }
             }
@@ -34,7 +34,7 @@ namespace TerraTeam3
         public void VoegItemToe(MatrixItem matrixItem)
         {
             List<MatrixItem> leegItems =( from item in Items
-                            where item.Symbool == 'L'
+                            where item.Symbool == '.'
                             select item).ToList();
 
             Random rnd = new Random();

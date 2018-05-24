@@ -11,7 +11,12 @@ namespace TerraTeam3
         public LeegItem(string naam)
         {
             this.Naam = naam;
-            this.Symbool = 'L';
+            this.Symbool = '.';
         }
+        public LeegItem()
+        {
+            this.Symbool = '.';
+        }
+
     }
 }

@@ -14,5 +14,11 @@ namespace TerraTeam3
             this.Symbool = 'C';
             // this.Levenskracht = levenskracht;    STARTWAARDE TE CHECKEN MET KLANT
         }
+        public Carnivoor()
+        {
+            this.Symbool = 'C';
+            // this.Levenskracht = levenskracht;    STARTWAARDE TE CHECKEN MET KLANT
+        }
+
     }
 }

@@ -18,17 +18,17 @@ namespace TerraTeam3
 
             for (var lus = 0;lus<=aantalPlanten;lus++ )
             {
-                Plant toeTeVoegenPlant = new Plant();
+                var toeTeVoegenPlant = new Plant();
                 mijnMatrix.VoegItemToe(toeTeVoegenPlant); 
             }
             for (var lus = 0; lus <= aantalHerbivoren; lus++)
             {
-                Plant toeTeVoegenHerbivoor = new Plant();
+                var toeTeVoegenHerbivoor = new Herbivoor();
                 mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
             }
             for (var lus = 0; lus <= aantalCarnivoren; lus++)
             {
-                Plant toeTeVoegenCarnivoor = new Plant();
+                var toeTeVoegenCarnivoor = new Carnivoor();
                 mijnMatrix.VoegItemToe(toeTeVoegenCarnivoor);
             }
 

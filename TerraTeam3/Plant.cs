@@ -13,5 +13,10 @@ namespace TerraTeam3
             this.Naam = naam;
             this.Symbool = 'P';
         }
+        public Plant()
+        {
+            this.Symbool = 'P';
+        }
+
     }
 }
