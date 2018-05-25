@@ -10,26 +10,27 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
-            var aantalPlanten = 2;
-            var aantalHerbivoren = 2;
-            var aantalCarnivoren = 2;
+            Random rnd = new Random();
+            var aantalPlanten = 4;
+            var aantalHerbivoren = 4;
+            var aantalCarnivoren = 4;
 
             Matrix mijnMatrix = new Matrix(6, 6);
 
 
-            for (var lus = 0; lus <= aantalPlanten; lus++)
+            for (var lus = 0; lus < aantalPlanten; lus++)
             {
                 var toeTeVoegenPlant = new Plant();
                 mijnMatrix.VoegItemToe(toeTeVoegenPlant);
             }
 
-            for (var lus = 0; lus <= aantalHerbivoren; lus++)
+            for (var lus = 0; lus < aantalHerbivoren; lus++)
             {
                 var toeTeVoegenHerbivoor = new Herbivoor();
                 mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
             }
 
-            for (var lus = 0; lus <= aantalCarnivoren; lus++)
+            for (var lus = 0; lus < aantalCarnivoren; lus++)
             {
                 var toeTeVoegenCarnivoor = new Carnivoor();
                 mijnMatrix.VoegItemToe(toeTeVoegenCarnivoor);
@@ -63,8 +64,7 @@ namespace TerraTeam3
                     for (var x = 0; x < gesorteerdeMatrix.Count; x++)
                     {
                         var geselecteerditem = gesorteerdeMatrix[x];
-
-
+                        
                         var matrixItemBuurman = mijnMatrix.GeefBuurmanRechts(geselecteerditem);
 
                         if (matrixItemBuurman != null)
@@ -76,8 +76,9 @@ namespace TerraTeam3
                                 geselecteerdeHerbivoor.Levenskracht++;
 
                                 matrixItemBuurman.IsVeranderd = true;
+                                geselecteerditem.IsVeranderd = true;
 
-                                mijnMatrix.BeweegNaarRechts(geselecteerdeHerbivoor, matrixItemBuurman);
+                                mijnMatrix.Beweeg(geselecteerdeHerbivoor, matrixItemBuurman);
                             }
 
                             // Carnivoor eet herbivoor
@@ -87,10 +88,11 @@ namespace TerraTeam3
                                 var buurmanHerbivoor = (Herbivoor)matrixItemBuurman;
 
                                 matrixItemBuurman.IsVeranderd = true;
+                                geselecteerditem.IsVeranderd = true;
 
                                 geselecteerdeCarnivoor.Levenskracht += buurmanHerbivoor.Levenskracht;
 
-                                mijnMatrix.BeweegNaarRechts(geselecteerdeCarnivoor, buurmanHerbivoor);
+                                mijnMatrix.Beweeg(geselecteerdeCarnivoor, buurmanHerbivoor);
                             }
 
                             // Herbivoor vrijt met herbivoor
@@ -111,7 +113,7 @@ namespace TerraTeam3
                                     speler1.IsVeranderd = true;
 
                                     speler1.Levenskracht += speler2.Levenskracht;
-                                    mijnMatrix.BeweegNaarRechts(speler1, speler2);
+                                    mijnMatrix.Beweeg(speler1, speler2);
                                 }
                                 else if (speler1.Levenskracht < speler2.Levenskracht)
                                 {
@@ -125,11 +127,21 @@ namespace TerraTeam3
                             {
                                 // controle welke vrij is
                                 var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
+                                if (matrixItemMogelijkheden.Count == 0)
+                                {
+                                    mijnMatrix.Beweeg(geselecteerditem, matrixItemBuurman);
+                                    //geselecteerditem.IsVeranderd = true;
+                                }
+                                else
+                                {
+                                    var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(-1, matrixItemMogelijkheden.Count())];
+                                    mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                    //geselecteerditem.IsVeranderd = true;
+                                }
 
 
-
+                                //}
                             }
-                        }
                         // PLANTEN TOEVOEGEN RAND
                         // TOETEVOEGEN BABIES TOEVOEGEN
                     }

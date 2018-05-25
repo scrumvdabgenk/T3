@@ -13,6 +13,7 @@ namespace TerraTeam3
         private int aantalPosities;
         public List<MatrixItem> Items = new List<MatrixItem>();
         Random rnd = new Random();
+        Random rnd2 = new Random();
 
         public Matrix(int aantalRijen, int aantalKolommen)
         {
@@ -26,7 +27,7 @@ namespace TerraTeam3
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
                     leegItem.PosY = y;
-                   // leegItem.Naam = "." + "_" + x + "_" + y;
+                    // leegItem.Naam = "." + "_" + x + "_" + y;
                     VulMatrixToe(leegItem);
 
                 }
@@ -65,21 +66,25 @@ namespace TerraTeam3
             {
                 kolomTeller++;
 
-                int levenskracht = 0;
-                if (item.Symbool == 'H')
-                {
-                    Herbivoor geselecteerdItem = (Herbivoor)item;
-                    levenskracht = geselecteerdItem.Levenskracht;
-                }
+                //int levenskracht = 0;
+                //if (item.Symbool == 'H')
+                //{
+                //    Herbivoor geselecteerdItem = (Herbivoor)item;
+                //    levenskracht = geselecteerdItem.Levenskracht;
+                //}
 
-                if (item.Symbool == 'C')
-                {
-                    Carnivoor geselecteerdItem = (Carnivoor)item;
-                    levenskracht = geselecteerdItem.Levenskracht;
-                }
+                //if (item.Symbool == 'C')
+                //{
+                //    Carnivoor geselecteerdItem = (Carnivoor)item;
+                //    levenskracht = geselecteerdItem.Levenskracht;
+                //}
 
 
-                Console.Write(item.Symbool + "("+levenskracht+")  ");
+                // Console.Write(item.Symbool + "("+levenskracht+")  ");
+                // Console.Write(item.Symbool + " ");
+
+                // Console.Write(item.Symbool + "(" + geefLegePosities(item).Count + ") ");
+                Console.Write(item.Symbool + " ");
                 if (kolomTeller == aantalKolommen)
                 {
                     Console.WriteLine();
@@ -101,7 +106,8 @@ namespace TerraTeam3
             var vrijePLaats = (from item in Items
                                where (item.PosY == startItem.PosY - 1 && item.PosX == startItem.PosX) ||
                                (item.PosY == startItem.PosY && item.PosX == startItem.PosX - 1) ||
-                               (item.PosY == startItem.PosY && item.PosX == startItem.PosX + 1)
+                               (item.PosY == startItem.PosY && item.PosX == startItem.PosX + 1) &&
+                               item.Symbool == '.'
                                select item).ToList();
             return vrijePLaats;
         }
@@ -114,7 +120,7 @@ namespace TerraTeam3
             return lijstTerugTegeven;
         }
 
-        public void BeweegNaarRechts(MatrixItem startItem, MatrixItem eindItem)
+        public void Beweeg(MatrixItem startItem, MatrixItem eindItem)
         {
             LeegItem nieuwLeegItem = new LeegItem();
             nieuwLeegItem.PosX = startItem.PosX;
@@ -145,6 +151,6 @@ namespace TerraTeam3
             }
         }
 
-        
+
     }
 }
