@@ -114,7 +114,7 @@ namespace TerraTeam3
             return lijstTerugTegeven;
         }
 
-        public void BeweegNaarRechts(MatrixItem startItem, MatrixItem eindItem)
+        public void Beweeg(MatrixItem startItem, MatrixItem eindItem)
         {
             LeegItem nieuwLeegItem = new LeegItem();
             nieuwLeegItem.PosX = startItem.PosX;
