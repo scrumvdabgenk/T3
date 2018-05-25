@@ -65,12 +65,21 @@ namespace TerraTeam3
             {
                 kolomTeller++;
 
-                MatrixItem geselecteerdItem = item;
+                int levenskracht = 0;
+                if (item.Symbool == 'H')
+                {
+                    Herbivoor geselecteerdItem = (Herbivoor)item;
+                    levenskracht = geselecteerdItem.Levenskracht;
+                }
 
-                if (item.)
-                
+                if (item.Symbool == 'C')
+                {
+                    Carnivoor geselecteerdItem = (Carnivoor)item;
+                    levenskracht = geselecteerdItem.Levenskracht;
+                }
 
-                Console.Write(item.Symbool + "("+item.le+")  ");
+
+                Console.Write(item.Symbool + "("+levenskracht+")  ");
                 if (kolomTeller == aantalKolommen)
                 {
                     Console.WriteLine();
@@ -85,6 +94,16 @@ namespace TerraTeam3
                                where item.PosY == startItem.PosY + 1 && item.PosX == startItem.PosX
                                select item).FirstOrDefault();
             return volgendItem;
+        }
+
+        public List<MatrixItem> geefLegePosities(MatrixItem startItem)
+        {
+            var vrijePLaats = (from item in Items
+                               where (item.PosY == startItem.PosY - 1 && item.PosX == startItem.PosX) ||
+                               (item.PosY == startItem.PosY && item.PosX == startItem.PosX - 1) ||
+                               (item.PosY == startItem.PosY && item.PosX == startItem.PosX + 1)
+                               select item).ToList();
+            return vrijePLaats;
         }
 
         public List<MatrixItem> GeefGesorteerdeLijst()
@@ -125,5 +144,7 @@ namespace TerraTeam3
                 item.IsVeranderd = false;
             }
         }
+
+        
     }
 }
