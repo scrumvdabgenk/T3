@@ -11,6 +11,8 @@ namespace TerraTeam3
         public string Naam { get; set; }
         public char Symbool { get; set; }
         private int valuePosX;
+        private int valuePosY;
+        public bool IsVeranderd { get; set; } = false;
         public int PosX
         {
             get
@@ -29,7 +31,24 @@ namespace TerraTeam3
                 }
             }
         }
-        public int PosY { get; set; }
 
+        public int PosY
+        {
+            get
+            {
+                return valuePosY;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    PosY = 0;
+                }
+                else
+                {
+                    valuePosY = value;
+                }
+            }
+        }
     }
 }

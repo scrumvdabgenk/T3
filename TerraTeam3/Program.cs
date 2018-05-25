@@ -10,9 +10,9 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
-            var aantalPlanten = 4;
-            var aantalHerbivoren = 4;
-            var aantalCarnivoren = 4;
+            var aantalPlanten = 8;
+            var aantalHerbivoren = 8;
+            var aantalCarnivoren = 8;
 
             Matrix mijnMatrix = new Matrix(6, 6);
 
@@ -41,78 +41,90 @@ namespace TerraTeam3
 
             do
             {
-                Console.WriteLine();
-                Console.WriteLine("Geef een commando:");
-                Console.WriteLine("- v + enter om de volgende dag te zien");
-                Console.WriteLine("- s + enter om te stoppen");
-                input = Console.ReadLine();
-
-            } while (input != "v" && input != "s");
-
-
-            if (input == "v")
-            {
-                var gesorteerdeMatrix = mijnMatrix.GeefGesorteerdeLijst();
-                int toeTeVoegenBabies = 0;
-
-                for (var x = 0; x < gesorteerdeMatrix.Count; x++)
+                do
                 {
-                    var geselecteerditem = gesorteerdeMatrix[x];
+                    Console.WriteLine();
+                    Console.WriteLine("Geef een commando:");
+                    Console.WriteLine("- v + enter om de volgende dag te zien");
+                    Console.WriteLine("- s + enter om te stoppen");
+                    input = Console.ReadLine();
 
+                } while (input != "v" && input != "s");
 
-                    var matrixItemBuurman = mijnMatrix.GeefBuurmanRechts(geselecteerditem);
+                Console.WriteLine();
 
-                    if (matrixItemBuurman != null)
+                if (input == "v")
+                {
+                    var gesorteerdeMatrix = mijnMatrix.GeefGesorteerdeLijst();
+                    int toeTeVoegenBabies = 0;
+
+                    mijnMatrix.ResetIsVeranderd();
+
+                    for (var x = 0; x < gesorteerdeMatrix.Count; x++)
                     {
+                        var geselecteerditem = gesorteerdeMatrix[x];
 
-                        // Herbivoor eet plant
-                        if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'P')
+
+                        var matrixItemBuurman = mijnMatrix.GeefBuurmanRechts(geselecteerditem);
+
+                        if (matrixItemBuurman != null)
                         {
-                            var geselecteerdeHerbivoor = (Herbivoor)geselecteerditem;
-                            geselecteerdeHerbivoor.Levenskracht++;
-
-                            mijnMatrix.BeweegNaarRechts(geselecteerdeHerbivoor, matrixItemBuurman);
-                        }
-
-                        // Carnivoor eet herbivoor
-                        if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'H')
-                        {
-                            var geselecteerdeCarnivoor = (Carnivoor)geselecteerditem;
-                            var buurmanHerbivoor = (Herbivoor)geselecteerditem;
-                            geselecteerdeCarnivoor.Levenskracht += buurmanHerbivoor.Levenskracht;
-
-                            mijnMatrix.BeweegNaarRechts(geselecteerdeCarnivoor, buurmanHerbivoor);
-                        }
-
-                        // Herbivoor vrijt met herbivoor
-                        if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
-                        {
-                            toeTeVoegenBabies++;
-                        }
-
-
-                        // Carnivoor vecht met carnivoor
-                        if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C')
-                        {
-                            var speler1 = (Carnivoor)geselecteerditem;
-                            var speler2 = (Carnivoor)matrixItemBuurman;
-
-                            if (speler1.Levenskracht > speler2.Levenskracht)
+                            // Herbivoor eet plant
+                            if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'P' && geselecteerditem.IsVeranderd == false)
                             {
-                                speler1.Levenskracht += speler2.Levenskracht;
-                                mijnMatrix.BeweegNaarRechts(speler1, speler2);
+                                var geselecteerdeHerbivoor = (Herbivoor)geselecteerditem;
+                                geselecteerdeHerbivoor.Levenskracht++;
+
+                                matrixItemBuurman.IsVeranderd = true;
+
+                                mijnMatrix.BeweegNaarRechts(geselecteerdeHerbivoor, matrixItemBuurman);
                             }
-                            else if (speler1.Levenskracht < speler2.Levenskracht)
+
+                            // Carnivoor eet herbivoor
+                            if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'H' && geselecteerditem.IsVeranderd == false)
                             {
-                                // SPELER 1 moet verdwijnen
-                                speler2.Levenskracht += speler1.Levenskracht;
+                                var geselecteerdeCarnivoor = (Carnivoor)geselecteerditem;
+                                var buurmanHerbivoor = (Herbivoor)matrixItemBuurman;
+
+                                matrixItemBuurman.IsVeranderd = true;
+
+                                geselecteerdeCarnivoor.Levenskracht += buurmanHerbivoor.Levenskracht;
+
+                                mijnMatrix.BeweegNaarRechts(geselecteerdeCarnivoor, buurmanHerbivoor);
                             }
+
+                            //// Herbivoor vrijt met herbivoor
+                            //if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
+                            //{
+                            //    toeTeVoegenBabies++;
+                            //}
+
+
+                            //// Carnivoor vecht met carnivoor
+                            //if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C')
+                            //{
+                            //    var speler1 = (Carnivoor)geselecteerditem;
+                            //    var speler2 = (Carnivoor)matrixItemBuurman;
+
+                            //    if (speler1.Levenskracht > speler2.Levenskracht)
+                            //    {
+                            //        speler1.Levenskracht += speler2.Levenskracht;
+                            //        mijnMatrix.BeweegNaarRechts(speler1, speler2);
+                            //    }
+                            //    else if (speler1.Levenskracht < speler2.Levenskracht)
+                            //    {
+                            //        mijnMatrix.VerwijderItem(speler1);
+                            //        speler2.Levenskracht += speler1.Levenskracht;
+                            //    }
+                            //}
                         }
+
                     }
-
-                }
                     mijnMatrix.GeefWeer();
+                }
             }
-                    }
+            while (input == "v");
         }
     }
+}
+

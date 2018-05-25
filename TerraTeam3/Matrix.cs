@@ -98,9 +98,27 @@ namespace TerraTeam3
 
             startItem.PosX = eindItem.PosX;
             startItem.PosY = eindItem.PosY;
-            
+
             Items.Remove(eindItem);
-            Items.Add(nieuwLeegItem);                        
+            Items.Add(nieuwLeegItem);
+        }
+
+        public void VerwijderItem(MatrixItem matrixItem)
+        {
+            LeegItem nieuwLeegItem = new LeegItem();
+            nieuwLeegItem.PosX = matrixItem.PosX;
+            nieuwLeegItem.PosY = matrixItem.PosY;
+
+            Items.Remove(matrixItem);
+            Items.Add(nieuwLeegItem);
+        }
+
+        public void ResetIsVeranderd()
+        {
+            foreach (MatrixItem item in Items)
+            {
+                item.IsVeranderd = false;
+            }
         }
     }
 }
