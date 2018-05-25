@@ -14,14 +14,14 @@ namespace TerraTeam3
         public List<MatrixItem> Items = new List<MatrixItem>();
         Random rnd = new Random();
 
-        public Matrix(int aantalRijen, int aantalKolommen)
+        public Matrix()
         {
-            this.aantalRijen = aantalRijen;
-            this.aantalKolommen = aantalKolommen;
-            this.aantalPosities = this.aantalRijen * this.aantalKolommen;
-            for (var x = 0; x < aantalRijen; x++)
+            //this.aantalRijen = aantalRijen;
+            //this.aantalKolommen = aantalKolommen;
+            //this.aantalPosities = this.aantalRijen * this.aantalKolommen;
+            for (var x = 0; x < Parameter.AantalRijen; x++)
             {
-                for (var y = 0; y < aantalKolommen; y++)
+                for (var y = 0; y < Parameter.AantalKolommen; y++)
                 {
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
