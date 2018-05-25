@@ -8,9 +8,9 @@ namespace TerraTeam3
 {
     public class Matrix
     {
-        private int aantalRijen;
-        private int aantalKolommen;
-        private int aantalPosities;
+        //private int aantalRijen;
+        //private int aantalKolommen;
+        //private int aantalPosities;
         public List<MatrixItem> Items = new List<MatrixItem>();
         Random rnd = new Random();
 
@@ -80,7 +80,7 @@ namespace TerraTeam3
 
 
                 Console.Write(item.Symbool + "("+levenskracht+")  ");
-                if (kolomTeller == aantalKolommen)
+                if (kolomTeller == Parameter.AantalKolommen)
                 {
                     Console.WriteLine();
                     kolomTeller = 0;
@@ -144,6 +144,8 @@ namespace TerraTeam3
                 item.IsVeranderd = false;
             }
         }
+
+
 
         
     }

@@ -8,25 +8,54 @@ namespace TerraTeam3
 {
     public static class Parameter
     {
+        static Random rnd = new Random();
         public static int AantalRijen { get; set; }
         public static int AantalKolommen { get; set; }
         public static int StartLevenskracht { get; set; }
         public static int MaxAantalPlantenBijvoegen { get; set; }
         public static int MaxAantalPlantenStart { get; set; }
-        public static int MaxAantalHerbivoren { get; set; }
-        public static int MaxAantalCarnivoren { get; set; }
+        public static int MaxAantalHerbivorenStart { get; set; }
+        public static int MaxAantalCarnivorenStart { get; set; }
         public static int AantalPosities { get; set; } 
+        public static int AantalPlanten
+        {
+            get
+            {
+                return rnd.Next(1, MaxAantalPlantenStart);
+            }
+        }
+        public static int AantalHerbivoren
+        {
+            get
+            {
+                return rnd.Next(1, MaxAantalHerbivorenStart);
+            }
+        }
+        public static int AantalCarnivoren
+        {
+            get
+            {
+                return rnd.Next(1, MaxAantalCarnivorenStart);
+            }
+        }
+        public static int AantalPlantenBijvoegen
+        {
+            get
+            {
+                return rnd.Next(1, MaxAantalPlantenBijvoegen);
+            }
+        }
 
 
         static Parameter()
         {
-            AantalRijen = 6;
-            AantalKolommen = 6;
+            AantalRijen = 12;
+            AantalKolommen = 12;
             StartLevenskracht = 1;
             MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 10;
             MaxAantalPlantenStart = AantalKolommen * AantalRijen / 10;
-            MaxAantalHerbivoren = AantalKolommen * AantalRijen / 10;
-            MaxAantalCarnivoren = AantalKolommen * AantalRijen / 10;
+            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 10;
+            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 10;
 
         }
 

@@ -10,11 +10,12 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
-            var aantalPlanten = 2;
-            var aantalHerbivoren = 2;
-            var aantalCarnivoren = 2;
+            var aantalPlanten = Parameter.AantalPlanten;
+            var aantalHerbivoren = Parameter.AantalHerbivoren;
+            var aantalCarnivoren = Parameter.AantalCarnivoren;
+            int aantalPlantenBijvoegen;
 
-            Matrix mijnMatrix = new Matrix(6, 6);
+            Matrix mijnMatrix = new Matrix();
 
 
             for (var lus = 0; lus <= aantalPlanten; lus++)
@@ -130,9 +131,17 @@ namespace TerraTeam3
 
                             }
                         }
-                        // PLANTEN TOEVOEGEN RAND
                         // TOETEVOEGEN BABIES TOEVOEGEN
+
                     }
+
+                    aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
+                    for (var lus = 0; lus <= aantalPlanten; lus++)
+                    {
+                        var toeTeVoegenPlant = new Plant();
+                        mijnMatrix.VoegItemToe(toeTeVoegenPlant);
+                    }
+                    Console.WriteLine("rb: aantal planten toegevoegd "+aantalPlantenBijvoegen);
                     mijnMatrix.GeefWeer();
                 }
             }
