@@ -10,9 +10,9 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
-            var aantalPlanten = 8;
-            var aantalHerbivoren = 8;
-            var aantalCarnivoren = 8;
+            var aantalPlanten = 2;
+            var aantalHerbivoren = 2;
+            var aantalCarnivoren = 2;
 
             Matrix mijnMatrix = new Matrix(6, 6);
 
@@ -101,7 +101,7 @@ namespace TerraTeam3
 
 
                             // Carnivoor vecht met carnivoor
-                            if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C' && geselecteerditem.IsVeranderd)
+                            if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C' && geselecteerditem.IsVeranderd == false)
                             {
                                 var speler1 = (Carnivoor)geselecteerditem;
                                 var speler2 = (Carnivoor)matrixItemBuurman;
@@ -120,10 +120,18 @@ namespace TerraTeam3
                                 }
                             }
 
+                            // Herbivoren en carnivoren bewegen
+                            if ((geselecteerditem.Symbool == 'C' || geselecteerditem.Symbool == 'H') && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
+                            {
+                                // controle welke vrij is
+                                var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
+
+
+
+                            }
                         }
                         // PLANTEN TOEVOEGEN RAND
                         // TOETEVOEGEN BABIES TOEVOEGEN
-
                     }
                     mijnMatrix.GeefWeer();
                 }
