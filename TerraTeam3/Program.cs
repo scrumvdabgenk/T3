@@ -93,31 +93,36 @@ namespace TerraTeam3
                                 mijnMatrix.BeweegNaarRechts(geselecteerdeCarnivoor, buurmanHerbivoor);
                             }
 
-                            //// Herbivoor vrijt met herbivoor
-                            //if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
-                            //{
-                            //    toeTeVoegenBabies++;
-                            //}
+                            // Herbivoor vrijt met herbivoor
+                            if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
+                            {
+                                toeTeVoegenBabies++;
+                            }
 
 
-                            //// Carnivoor vecht met carnivoor
-                            //if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C')
-                            //{
-                            //    var speler1 = (Carnivoor)geselecteerditem;
-                            //    var speler2 = (Carnivoor)matrixItemBuurman;
+                            // Carnivoor vecht met carnivoor
+                            if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C' && geselecteerditem.IsVeranderd)
+                            {
+                                var speler1 = (Carnivoor)geselecteerditem;
+                                var speler2 = (Carnivoor)matrixItemBuurman;
 
-                            //    if (speler1.Levenskracht > speler2.Levenskracht)
-                            //    {
-                            //        speler1.Levenskracht += speler2.Levenskracht;
-                            //        mijnMatrix.BeweegNaarRechts(speler1, speler2);
-                            //    }
-                            //    else if (speler1.Levenskracht < speler2.Levenskracht)
-                            //    {
-                            //        mijnMatrix.VerwijderItem(speler1);
-                            //        speler2.Levenskracht += speler1.Levenskracht;
-                            //    }
-                            //}
+                                if (speler1.Levenskracht > speler2.Levenskracht)
+                                {
+                                    speler1.IsVeranderd = true;
+
+                                    speler1.Levenskracht += speler2.Levenskracht;
+                                    mijnMatrix.BeweegNaarRechts(speler1, speler2);
+                                }
+                                else if (speler1.Levenskracht < speler2.Levenskracht)
+                                {
+                                    speler2.Levenskracht += speler1.Levenskracht;
+                                    mijnMatrix.VerwijderItem(speler1);
+                                }
+                            }
+
                         }
+                        // PLANTEN TOEVOEGEN RAND
+                        // TOETEVOEGEN BABIES TOEVOEGEN
 
                     }
                     mijnMatrix.GeefWeer();

@@ -26,7 +26,7 @@ namespace TerraTeam3
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
                     leegItem.PosY = y;
-                    leegItem.Naam = "." + "_" + x + "_" + y;
+                   // leegItem.Naam = "." + "_" + x + "_" + y;
                     VulMatrixToe(leegItem);
 
                 }
@@ -65,7 +65,12 @@ namespace TerraTeam3
             {
                 kolomTeller++;
 
-                Console.Write(item.Symbool + "  ");
+                MatrixItem geselecteerdItem = item;
+
+                if (item.)
+                
+
+                Console.Write(item.Symbool + "("+item.le+")  ");
                 if (kolomTeller == aantalKolommen)
                 {
                     Console.WriteLine();
