@@ -10,6 +10,7 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
+            Random rnd = new Random(); 
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
             var aantalCarnivoren = Parameter.AantalCarnivoren;
@@ -134,8 +135,11 @@ namespace TerraTeam3
                                 }
                                 else
                                 {
-                                    var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(-1, matrixItemMogelijkheden.Count())];
+                                    if (matrixItemMogelijkheden.Count()>1)
+                                    {
+                                    var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(1, matrixItemMogelijkheden.Count())];
                                     mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                    }
                                     //geselecteerditem.IsVeranderd = true;
                                 }
 
