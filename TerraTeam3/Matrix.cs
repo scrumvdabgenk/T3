@@ -78,8 +78,21 @@ namespace TerraTeam3
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
+if (item.Symbool == 'P')
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
+if (item.Symbool=='C')
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                if (item.Symbool == 'H')
+                {
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                }
 
                 Console.Write(item.Symbool + "("+levenskracht+")  ");
+                Console.ForegroundColor = ConsoleColor.White;
                 if (kolomTeller == Parameter.AantalKolommen)
                 {
                     Console.WriteLine();
