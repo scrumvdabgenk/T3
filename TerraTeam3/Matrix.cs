@@ -82,7 +82,7 @@ namespace TerraTeam3
 
                 Console.ForegroundColor = item.Kleur;
 
-                if (item.GetType() == typeof(Herbivoor) || item.GetType() == typeof(Carnivoor))
+                if (item.GetType() == typeof(Herbivoor) || item.GetType() == typeof(Carnivoor) || item.GetType() == typeof(Mens))
                 {
                     Console.Write(item.Symbool + " (" + levenskracht + ") ");
                 }
