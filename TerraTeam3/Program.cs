@@ -128,26 +128,20 @@ namespace TerraTeam3
                             {
                                 // controle welke vrij is
                                 var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
-                                if (matrixItemMogelijkheden.Count == 0)
-                                {
-                                    mijnMatrix.Beweeg(geselecteerditem, matrixItemBuurman);
-                                    //geselecteerditem.IsVeranderd = true;
-                                }
-                                else
-                                {
-                                    if (matrixItemMogelijkheden.Count() > 0)
-                                    {
-                                        var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(0, matrixItemMogelijkheden.Count())];
-                                        mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
-                                        randomGeselecteerdItem.IsVeranderd = true;
-                                    }
-                                    geselecteerditem.IsVeranderd = true;
-                                }
 
-
+                                if (matrixItemMogelijkheden.Count() > 0)
+                                {
+                                    var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(0, matrixItemMogelijkheden.Count())];
+                                    mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                    randomGeselecteerdItem.IsVeranderd = true;
+                                }
+                                geselecteerditem.IsVeranderd = true;
+                                
                             }
                         }
                     }
+
+                    Console.Clear();
                     mijnMatrix.GeefWeer();
                     int aantalPlaatsen;
                     //babies herbivoren toevoegen
@@ -161,7 +155,7 @@ namespace TerraTeam3
                     for (var lus = 0; lus < toeTeVoegenBabies; lus++)
                     {
                         var toeTeVoegenHerbivoor = new Herbivoor();
-                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);                        
+                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
                     }
 
                     //planten ad random toegevoegd
