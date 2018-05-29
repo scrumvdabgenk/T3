@@ -135,12 +135,13 @@ namespace TerraTeam3
                                 }
                                 else
                                 {
-                                    if (matrixItemMogelijkheden.Count() > 1)
+                                    if (matrixItemMogelijkheden.Count() > 0)
                                     {
-                                        var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(1, matrixItemMogelijkheden.Count())];
+                                        var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(0, matrixItemMogelijkheden.Count())];
                                         mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                        randomGeselecteerdItem.IsVeranderd = true;
                                     }
-                                    //geselecteerditem.IsVeranderd = true;
+                                    geselecteerditem.IsVeranderd = true;
                                 }
 
 

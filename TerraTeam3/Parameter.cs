@@ -24,6 +24,7 @@ namespace TerraTeam3
                 return rnd.Next(1, MaxAantalPlantenStart);
             }
         }
+
         public static int AantalHerbivoren
         {
             get
@@ -31,6 +32,7 @@ namespace TerraTeam3
                 return rnd.Next(1, MaxAantalHerbivorenStart);
             }
         }
+
         public static int AantalCarnivoren
         {
             get
@@ -60,8 +62,5 @@ namespace TerraTeam3
             MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 10;
             MinAantalLeeg = AantalKolommen * AantalRijen / 10;
         }
-
     }
-
-    
 }

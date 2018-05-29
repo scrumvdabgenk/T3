@@ -6,19 +6,28 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
-    public class Carnivoor:Fauna
+    public class Carnivoor : Fauna
     {
-        public Carnivoor(string naam): base()
+        public Carnivoor(string naam) : base()
         {
             this.Naam = naam;
-            this.Symbool = 'C';
             
         }
-        public Carnivoor():base()
+        public override ConsoleColor Kleur
         {
-            this.Symbool = 'C';
-            
+            get
+            {
+                if (Levenskracht < 3)
+                { return ConsoleColor.Red; }
+                else
+                { return ConsoleColor.DarkRed; }
+            }
         }
 
+        public Carnivoor() : base()
+        {
+            this.Symbool = 'C';
+            this.Levenskracht = Parameter.StartLevenskracht;
+        }
     }
 }

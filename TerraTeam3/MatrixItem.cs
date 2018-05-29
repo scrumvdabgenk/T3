@@ -13,6 +13,9 @@ namespace TerraTeam3
         private int valuePosX;
         private int valuePosY;
         public bool IsVeranderd { get; set; } = false;
+
+        public abstract ConsoleColor Kleur { get;}
+
         public int PosX
         {
             get
