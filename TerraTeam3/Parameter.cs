@@ -16,7 +16,18 @@ namespace TerraTeam3
         public static int MaxAantalPlantenStart { get; set; }
         public static int MaxAantalHerbivorenStart { get; set; }
         public static int MaxAantalCarnivorenStart { get; set; }
-        public static int AantalPosities { get; set; } 
+        public static int AantalPosities { get; set; }
+        public static ConsoleColor PlantKleur { get; set; }
+        public static ConsoleColor LeegItemKleur { get; set; }
+        public static ConsoleColor HerbivoorStandaardKleur { get; set; }
+        public static ConsoleColor HerbivoorSterkKleur { get; set; }
+        public static ConsoleColor CarnivoorStandaardKleur { get; set; }
+        public static ConsoleColor CarnivoorSterkKleur { get; set; }
+        public static char MensTeken { get; set; }
+        public static char PlantTeken { get; set; }
+        public static char LeegItemTeken { get; set; }
+        public static char HerbivoorTeken { get; set; }
+        public static char CarnivoorTeken { get; set; }
         public static int AantalPlanten
         {
             get
@@ -50,6 +61,17 @@ namespace TerraTeam3
         
         static Parameter()
         {
+            MensTeken = 'M';
+            LeegItemTeken = '.';
+            PlantTeken = 'P';
+            HerbivoorTeken = 'H';
+            CarnivoorTeken = 'C';
+            CarnivoorStandaardKleur = ConsoleColor.DarkRed;
+            CarnivoorSterkKleur = ConsoleColor.Red;
+            HerbivoorSterkKleur = ConsoleColor.Magenta;
+            HerbivoorStandaardKleur = ConsoleColor.DarkMagenta;
+            LeegItemKleur = ConsoleColor.Gray;
+            PlantKleur = ConsoleColor.Green;
             AantalRijen = 6;
             AantalKolommen = 6;
             StartLevenskracht = 1;

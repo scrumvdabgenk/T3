@@ -66,13 +66,15 @@ namespace TerraTeam3
                 kolomTeller++;
 
                 int levenskracht = 0;
-                if (item.Symbool == 'H')
+                if (item.Symbool == Parameter.HerbivoorTeken)
+                //if (item.Symbool == 'H')
                 {
                     Herbivoor geselecteerdItem = (Herbivoor)item;
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
-                if (item.Symbool == 'C')
+                if (item.Symbool == Parameter.CarnivoorTeken)
+                //if (item.Symbool == 'C')
                 {
                     Carnivoor geselecteerdItem = (Carnivoor)item;
                     levenskracht = geselecteerdItem.Levenskracht;

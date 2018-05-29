@@ -83,7 +83,8 @@ namespace TerraTeam3
                             }
 
                             // Carnivoor eet herbivoor
-                            if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'H' && geselecteerditem.IsVeranderd == false)
+                            if (geselecteerditem.Symbool == Parameter.CarnivoorTeken && matrixItemBuurman.Symbool == Parameter.HerbivoorTeken && geselecteerditem.IsVeranderd == false)
+                            //if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'H' && geselecteerditem.IsVeranderd == false)
                             {
                                 var geselecteerdeCarnivoor = (Carnivoor)geselecteerditem;
                                 var buurmanHerbivoor = (Herbivoor)matrixItemBuurman;
@@ -97,14 +98,16 @@ namespace TerraTeam3
                             }
 
                             // Herbivoor vrijt met herbivoor
-                            if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
+                            if (geselecteerditem.Symbool == Parameter.HerbivoorTeken && matrixItemBuurman.Symbool == Parameter.HerbivoorTeken)
+                            //if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
                             {
                                 toeTeVoegenBabies++;
                             }
 
 
                             // Carnivoor vecht met carnivoor
-                            if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C' && geselecteerditem.IsVeranderd == false)
+                            if (geselecteerditem.Symbool == Parameter.CarnivoorTeken && matrixItemBuurman.Symbool == Parameter.CarnivoorTeken && geselecteerditem.IsVeranderd == false)
+                            //if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C' && geselecteerditem.IsVeranderd == false)
                             {
                                 var speler1 = (Carnivoor)geselecteerditem;
                                 var speler2 = (Carnivoor)matrixItemBuurman;
@@ -124,7 +127,8 @@ namespace TerraTeam3
                             }
 
                             // Herbivoren en carnivoren bewegen
-                            if ((geselecteerditem.Symbool == 'C' || geselecteerditem.Symbool == 'H') && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
+                            if ((geselecteerditem.Symbool == Parameter.CarnivoorTeken || geselecteerditem.Symbool == Parameter.HerbivoorTeken) && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
+                            //if ((geselecteerditem.Symbool == 'C' || geselecteerditem.Symbool == 'H') && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
                             {
                                 // Controle welke vrij is
                                 var matrixMogelijkePosities = mijnMatrix.geefLegePosities(geselecteerditem);
