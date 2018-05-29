@@ -14,29 +14,41 @@ namespace TerraTeam3
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
             var aantalCarnivoren = Parameter.AantalCarnivoren;
+            var aantalMensen = Parameter.AantalMensen;
 
 
             Matrix mijnMatrix = new Matrix();
 
 
+            // Aanmaken planten
             for (var lus = 0; lus < aantalPlanten; lus++)
             {
                 var toeTeVoegenPlant = new Plant();
                 mijnMatrix.VoegItemToe(toeTeVoegenPlant);
             }
 
+            // Aanmaken herbivoren
             for (var lus = 0; lus < aantalHerbivoren; lus++)
             {
                 var toeTeVoegenHerbivoor = new Herbivoor();
                 mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
             }
 
+            // Aanmaken carnivoren
             for (var lus = 0; lus < aantalCarnivoren; lus++)
             {
                 var toeTeVoegenCarnivoor = new Carnivoor();
                 mijnMatrix.VoegItemToe(toeTeVoegenCarnivoor);
             }
 
+            // Aanmaken mensen
+            for (var lus = 0; lus < aantalMensen; lus++)
+            {
+                var toeTeVoegenMens = new Mens();
+                mijnMatrix.VoegItemToe(toeTeVoegenMens);
+            }
+
+            // Eerste weergave
             mijnMatrix.GeefWeer();
 
             string input;
@@ -84,7 +96,6 @@ namespace TerraTeam3
 
                             // Carnivoor eet herbivoor
                             if (geselecteerditem.Symbool == Parameter.CarnivoorTeken && matrixItemBuurman.Symbool == Parameter.HerbivoorTeken && geselecteerditem.IsVeranderd == false)
-                            //if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'H' && geselecteerditem.IsVeranderd == false)
                             {
                                 var geselecteerdeCarnivoor = (Carnivoor)geselecteerditem;
                                 var buurmanHerbivoor = (Herbivoor)matrixItemBuurman;
@@ -99,7 +110,6 @@ namespace TerraTeam3
 
                             // Herbivoor vrijt met herbivoor
                             if (geselecteerditem.Symbool == Parameter.HerbivoorTeken && matrixItemBuurman.Symbool == Parameter.HerbivoorTeken)
-                            //if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'H')
                             {
                                 toeTeVoegenBabies++;
                             }
@@ -107,7 +117,6 @@ namespace TerraTeam3
 
                             // Carnivoor vecht met carnivoor
                             if (geselecteerditem.Symbool == Parameter.CarnivoorTeken && matrixItemBuurman.Symbool == Parameter.CarnivoorTeken && geselecteerditem.IsVeranderd == false)
-                            //if (geselecteerditem.Symbool == 'C' && matrixItemBuurman.Symbool == 'C' && geselecteerditem.IsVeranderd == false)
                             {
                                 var speler1 = (Carnivoor)geselecteerditem;
                                 var speler2 = (Carnivoor)matrixItemBuurman;
@@ -126,11 +135,10 @@ namespace TerraTeam3
                                 }
                             }
 
-                            // Herbivoren en carnivoren bewegen
-                            if ((geselecteerditem.Symbool == Parameter.CarnivoorTeken || geselecteerditem.Symbool == Parameter.HerbivoorTeken) && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
-                            //if ((geselecteerditem.Symbool == 'C' || geselecteerditem.Symbool == 'H') && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
+                            // Herbivoren, carnivoren en mensen bewegen
+                            if ((geselecteerditem.Symbool == Parameter.CarnivoorTeken || geselecteerditem.Symbool == Parameter.HerbivoorTeken || geselecteerditem.Symbool == Parameter.MensTeken) && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
                             {
-                                // controle welke vrij is
+                                // Controle welke plaatse rondom vrij is
                                 var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
 
                                 if (matrixItemMogelijkheden.Count() > 0)
