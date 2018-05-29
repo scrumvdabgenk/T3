@@ -49,6 +49,8 @@ namespace TerraTeam3
                     Console.WriteLine("Geef een commando:");
                     Console.WriteLine("- v + enter om de volgende dag te zien");
                     Console.WriteLine("- s + enter om te stoppen");
+                    Console.WriteLine("- o + enter om op te slaan");
+                    Console.WriteLine("- l + enter om een opgeslagen spel te laden");
                     input = Console.ReadLine();
 
                 } while (input != "v" && input != "s");
