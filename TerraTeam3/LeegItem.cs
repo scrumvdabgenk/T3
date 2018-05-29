@@ -14,12 +14,12 @@ namespace TerraTeam3
         //}
         public LeegItem()
         {
-            this.Symbool = '.';
+            this.Symbool = Parameter.LeegItemTeken;
         }
         public override ConsoleColor Kleur
         {
             get
-            { return ConsoleColor.Gray; }
+            { return Parameter.LeegItemKleur; }
         }
     }
 }
