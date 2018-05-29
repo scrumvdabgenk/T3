@@ -23,6 +23,8 @@ namespace TerraTeam3
         public static ConsoleColor HerbivoorSterkKleur { get; set; }
         public static ConsoleColor CarnivoorStandaardKleur { get; set; }
         public static ConsoleColor CarnivoorSterkKleur { get; set; }
+        public static ConsoleColor MensStandaardKleur { get; set; }
+        public static ConsoleColor MensSterkKleur { get; set; }
         public static char MensTeken { get; set; }
         public static char PlantTeken { get; set; }
         public static char LeegItemTeken { get; set; }
@@ -69,6 +71,8 @@ namespace TerraTeam3
             PlantTeken = 'P';
             HerbivoorTeken = 'H';
             CarnivoorTeken = 'C';
+            MensSterkKleur = ConsoleColor.DarkYellow;
+            MensStandaardKleur = ConsoleColor.Yellow;
             CarnivoorStandaardKleur = ConsoleColor.DarkRed;
             CarnivoorSterkKleur = ConsoleColor.Red;
             HerbivoorSterkKleur = ConsoleColor.Magenta;
