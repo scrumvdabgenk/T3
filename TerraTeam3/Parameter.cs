@@ -16,6 +16,7 @@ namespace TerraTeam3
         public static int MaxAantalPlantenStart { get; set; }
         public static int MaxAantalHerbivorenStart { get; set; }
         public static int MaxAantalCarnivorenStart { get; set; }
+        public static int MaxAantalMensenStart { get; set; }
         public static int AantalPosities { get; set; }
         public static ConsoleColor PlantKleur { get; set; }
         public static ConsoleColor LeegItemKleur { get; set; }
@@ -23,6 +24,8 @@ namespace TerraTeam3
         public static ConsoleColor HerbivoorSterkKleur { get; set; }
         public static ConsoleColor CarnivoorStandaardKleur { get; set; }
         public static ConsoleColor CarnivoorSterkKleur { get; set; }
+        public static ConsoleColor MensStandaardKleur { get; set; }
+        public static ConsoleColor MensSterkKleur { get; set; }
         public static char MensTeken { get; set; }
         public static char PlantTeken { get; set; }
         public static char LeegItemTeken { get; set; }
@@ -51,6 +54,15 @@ namespace TerraTeam3
                 return rnd.Next(1, MaxAantalCarnivorenStart);
             }
         }
+
+        public static int AantalMensen
+        {
+            get
+            {
+                return rnd.Next(1, MaxAantalMensenStart);
+            }
+        }
+
         public static int AantalPlantenBijvoegen
         {
             get
@@ -69,6 +81,8 @@ namespace TerraTeam3
             PlantTeken = 'P';
             HerbivoorTeken = 'H';
             CarnivoorTeken = 'C';
+            MensSterkKleur = ConsoleColor.DarkYellow;
+            MensStandaardKleur = ConsoleColor.Yellow;
             CarnivoorStandaardKleur = ConsoleColor.DarkRed;
             CarnivoorSterkKleur = ConsoleColor.Red;
             HerbivoorSterkKleur = ConsoleColor.Magenta;
@@ -78,11 +92,12 @@ namespace TerraTeam3
             AantalRijen = 6;
             AantalKolommen = 6;
             StartLevenskracht = 1;
-            MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 10;
-            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 10;
-            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 10;
-            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 10;
-            MinAantalLeeg = AantalKolommen * AantalRijen / 10;
+            MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 15;
+            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 7;
+            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 7;
+            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 7;
+            MaxAantalMensenStart = AantalKolommen * AantalRijen / 7;
+            MinAantalLeeg = AantalKolommen * AantalRijen / 7;
         }
     }
 }
