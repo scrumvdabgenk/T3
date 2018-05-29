@@ -136,17 +136,18 @@ namespace TerraTeam3
                                     randomGeselecteerdItem.IsVeranderd = true;
                                 }
                                 geselecteerditem.IsVeranderd = true;
-                                
+
                             }
                         }
                     }
 
-                    Console.Clear();
-                    mijnMatrix.GeefWeer();
+                    
+
                     int aantalPlaatsen;
-                    //babies herbivoren toevoegen
+
+                    // Babies herbivoren toevoegen
                     aantalPlaatsen = mijnMatrix.AantalLegePosities();
-                    //var aantalPlaatsen = 1;
+
                     if (toeTeVoegenBabies > aantalPlaatsen)
                     {
                         toeTeVoegenBabies = aantalPlaatsen;
@@ -158,10 +159,10 @@ namespace TerraTeam3
                         mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
                     }
 
-                    //planten ad random toegevoegd
+                    // Planten ad random toevoegen
                     var aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
                     aantalPlaatsen = mijnMatrix.AantalLegePosities();
-                    //var aantalPlaatsen = 1;
+
                     if (aantalPlantenBijvoegen > aantalPlaatsen - Parameter.MinAantalLeeg)
                     {
                         aantalPlantenBijvoegen = aantalPlaatsen - Parameter.MinAantalLeeg;
@@ -173,6 +174,9 @@ namespace TerraTeam3
                         mijnMatrix.VoegItemToe(toeTeVoegenPlant);
                     }
 
+
+                    Console.Clear();
+                    mijnMatrix.GeefWeer();
                 }
             }
             while (input == "v");
