@@ -10,7 +10,7 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
-            Random rnd = new Random(); 
+            Random rnd = new Random();
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
             var aantalCarnivoren = Parameter.AantalCarnivoren;
@@ -65,7 +65,7 @@ namespace TerraTeam3
                     for (var x = 0; x < gesorteerdeMatrix.Count; x++)
                     {
                         var geselecteerditem = gesorteerdeMatrix[x];
-                        
+
                         var matrixItemBuurman = mijnMatrix.GeefBuurmanRechts(geselecteerditem);
 
                         if (matrixItemBuurman != null)
@@ -126,37 +126,23 @@ namespace TerraTeam3
                             // Herbivoren en carnivoren bewegen
                             if ((geselecteerditem.Symbool == 'C' || geselecteerditem.Symbool == 'H') && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
                             {
-                                // controle welke vrij is
-                                var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
-                                if (matrixItemMogelijkheden.Count == 0)
+                                // Controle welke vrij is
+                                var matrixMogelijkePosities = mijnMatrix.geefLegePosities(geselecteerditem);
+
+                                if (matrixMogelijkePosities.Count() > 0)
                                 {
-                                    mijnMatrix.Beweeg(geselecteerditem, matrixItemBuurman);
-                                    //geselecteerditem.IsVeranderd = true;
-                                }
-                                else
-                                {
-                                    if (matrixItemMogelijkheden.Count()>1)
-                                    {
-                                    var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(1, matrixItemMogelijkheden.Count())];
+                                    var randomGeselecteerdItem = matrixMogelijkePosities[rnd.Next(0, matrixMogelijkePosities.Count())];
                                     mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
-                                    }
-                                    //geselecteerditem.IsVeranderd = true;
+                                    randomGeselecteerdItem.IsVeranderd = true;
                                 }
-
-
+                                geselecteerditem.IsVeranderd = true;
                             }
                         }
-                        // TOETEVOEGEN BABIES TOEVOEGEN
-
                     }
+                    // HH Babies toevoegen
 
-                    aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
-                    for (var lus = 0; lus <= aantalPlanten; lus++)
-                    {
-                        var toeTeVoegenPlant = new Plant();
-                        mijnMatrix.VoegItemToe(toeTeVoegenPlant);
-                    }
-                    Console.WriteLine("rb: aantal planten toegevoegd "+aantalPlantenBijvoegen);
+                    // Nieuwe planten toevoegen
+                    Console.Clear();
                     mijnMatrix.GeefWeer();
                 }
             }

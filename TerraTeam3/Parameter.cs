@@ -49,8 +49,8 @@ namespace TerraTeam3
 
         static Parameter()
         {
-            AantalRijen = 12;
-            AantalKolommen = 12;
+            AantalRijen = 6;
+            AantalKolommen = 6;
             StartLevenskracht = 1;
             MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 10;
             MaxAantalPlantenStart = AantalKolommen * AantalRijen / 10;
