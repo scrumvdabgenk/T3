@@ -25,7 +25,7 @@ namespace TerraTeam3
                 {
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
-                    leegItem.PosY = y;                  
+                    leegItem.PosY = y;
                     VulMatrixToe(leegItem);
 
                 }
@@ -78,20 +78,17 @@ namespace TerraTeam3
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
-                //if (item.Symbool == 'P')  TEST KLEUREN MAANDAG
-                //                {
-                //                    Console.ForegroundColor = ConsoleColor.Green;
-                //                }
-                //if (item.Symbool=='C')
-                //                {
-                //                    Console.ForegroundColor = ConsoleColor.Red;
-                //                }
-                //                if (item.Symbool == 'H')
-                //                {
-                //                    Console.ForegroundColor = ConsoleColor.Blue;
-                //                }
                 Console.ForegroundColor = item.Kleur;
-                Console.Write(item.Symbool + "("+levenskracht+")  ");
+
+                if (item.GetType() == typeof(Herbivoor) || item.GetType() == typeof(Carnivoor))
+                {
+                    Console.Write(item.Symbool + " (" + levenskracht + ") ");
+                }
+                else
+                {
+                    Console.Write(item.Symbool + "     ");
+                }
+
                 Console.ForegroundColor = ConsoleColor.White;
                 if (kolomTeller == Parameter.AantalKolommen)
                 {
@@ -117,7 +114,7 @@ namespace TerraTeam3
                                where (item.PosY == startItem.PosY - 1 && item.PosX == startItem.PosX) && item.Symbool == '.' ||
                                (item.PosY == startItem.PosY && item.PosX == startItem.PosX - 1) && item.Symbool == '.' ||
                                (item.PosY == startItem.PosY && item.PosX == startItem.PosX + 1) && item.Symbool == '.' ||
-                               (item.PosY == startItem.PosY +1 && item.PosX == startItem.PosX) && item.Symbool == '.'
+                               (item.PosY == startItem.PosY + 1 && item.PosX == startItem.PosX) && item.Symbool == '.'
                                select item).ToList();
             return vrijePLaats;
 
@@ -164,6 +161,6 @@ namespace TerraTeam3
 
 
 
-        
+
     }
 }
