@@ -89,15 +89,15 @@ namespace TerraTeam3
             HerbivoorStandaardKleur = ConsoleColor.DarkMagenta;
             LeegItemKleur = ConsoleColor.Gray;
             PlantKleur = ConsoleColor.Green;
-            AantalRijen = 6;
-            AantalKolommen = 6;
+            AantalRijen = 12;
+            AantalKolommen = 12;
             StartLevenskracht = 1;
             MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 15;
-            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 7;
-            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 7;
-            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 7;
-            MaxAantalMensenStart = AantalKolommen * AantalRijen / 7;
-            MinAantalLeeg = AantalKolommen * AantalRijen / 7;
+            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 20;
+            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 20;
+            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 20;
+            MaxAantalMensenStart = AantalKolommen * AantalRijen / 20;
+            MinAantalLeeg = AantalKolommen * AantalRijen / 20;
         }
     }
 }

@@ -85,7 +85,7 @@ namespace TerraTeam3
                         if (matrixItemBuurman != null)
                         {
                             // Herbivoor eet plant
-                            if (geselecteerditem.Symbool == 'H' && matrixItemBuurman.Symbool == 'P' && geselecteerditem.IsVeranderd == false)
+                            if (geselecteerditem.Symbool == Parameter.HerbivoorTeken && matrixItemBuurman.Symbool == Parameter.PlantTeken && geselecteerditem.IsVeranderd == false)
                             {
                                 var geselecteerdeHerbivoor = (Herbivoor)geselecteerditem;
                                 geselecteerdeHerbivoor.Levenskracht++;
@@ -137,8 +137,28 @@ namespace TerraTeam3
                                 }
                             }
 
+                            // Mens vecht met carnivoor
+                            if (geselecteerditem.Symbool == Parameter.MensTeken && matrixItemBuurman.Symbool == Parameter.CarnivoorTeken && geselecteerditem.IsVeranderd == false)
+                            {
+                                var speler1 = (Mens)geselecteerditem;
+                                var speler2 = (Carnivoor)matrixItemBuurman;
+
+                                if (speler1.Levenskracht >= speler2.Levenskracht)
+                                {
+                                    speler1.IsVeranderd = true;
+
+                                    speler1.Levenskracht += speler2.Levenskracht;
+                                    mijnMatrix.Beweeg(speler1, speler2);
+                                }
+                                else if (speler1.Levenskracht < speler2.Levenskracht)
+                                {
+                                    speler2.Levenskracht += speler1.Levenskracht;
+                                    mijnMatrix.VerwijderItem(speler1);
+                                }
+                            }
+
                             // Herbivoren, carnivoren en mensen bewegen
-                            if ((geselecteerditem.Symbool == Parameter.CarnivoorTeken || geselecteerditem.Symbool == Parameter.HerbivoorTeken || geselecteerditem.Symbool == Parameter.MensTeken) && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
+                            if ((geselecteerditem.Symbool == Parameter.CarnivoorTeken || geselecteerditem.Symbool == Parameter.HerbivoorTeken || geselecteerditem.Symbool == Parameter.MensTeken) && matrixItemBuurman.Symbool == Parameter.LeegItemTeken && geselecteerditem.IsVeranderd == false)
                             {
                                 // Controle welke plaatse rondom vrij is
                                 var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
@@ -170,6 +190,7 @@ namespace TerraTeam3
                     for (var lus = 0; lus < toeTeVoegenBabies; lus++)
                     {
                         var toeTeVoegenHerbivoor = new Herbivoor();
+                        toeTeVoegenHerbivoor.Levenskracht = 0;
                         mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
                     }
 
