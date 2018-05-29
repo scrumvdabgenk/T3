@@ -8,15 +8,18 @@ namespace TerraTeam3
 {
     public class LeegItem: MatrixItem
     {
-        public LeegItem(string naam)
-        {
-            this.Naam = naam;
-            this.Symbool = '.';
-        }
+        //public LeegItem(string naam, ConsoleColor leegItemKleur)
+        //{
+        //    this.Naam = naam;
+        //}
         public LeegItem()
         {
             this.Symbool = '.';
         }
-
+        public override ConsoleColor Kleur
+        {
+            get
+            { return ConsoleColor.Gray; }
+        }
     }
 }

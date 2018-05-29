@@ -39,6 +39,7 @@ namespace TerraTeam3
                                           where item.Symbool == '.'
                                           select item).ToList();
 
+
             var randomGeselecteerdItem = leegItems[rnd.Next(0, leegItems.Count())];
 
             matrixItem.PosX = randomGeselecteerdItem.PosX;
@@ -78,19 +79,19 @@ namespace TerraTeam3
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
-if (item.Symbool == 'P')
-                {
-                    Console.ForegroundColor = ConsoleColor.Green;
-                }
-if (item.Symbool=='C')
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                }
-                if (item.Symbool == 'H')
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                }
-
+                //if (item.Symbool == 'P')  TEST KLEUREN MAANDAG
+                //                {
+                //                    Console.ForegroundColor = ConsoleColor.Green;
+                //                }
+                //if (item.Symbool=='C')
+                //                {
+                //                    Console.ForegroundColor = ConsoleColor.Red;
+                //                }
+                //                if (item.Symbool == 'H')
+                //                {
+                //                    Console.ForegroundColor = ConsoleColor.Blue;
+                //                }
+                Console.ForegroundColor = item.Kleur;
                 Console.Write(item.Symbool + "("+levenskracht+")  ");
                 Console.ForegroundColor = ConsoleColor.White;
                 if (kolomTeller == Parameter.AantalKolommen)
