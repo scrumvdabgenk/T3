@@ -23,6 +23,7 @@ namespace TerraTeam3
                 else
                 { return ConsoleColor.DarkMagenta; }
             }
+        }
 
         public Herbivoor() : base()
         {

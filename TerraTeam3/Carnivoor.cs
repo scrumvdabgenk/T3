@@ -22,6 +22,7 @@ namespace TerraTeam3
                 else
                 { return ConsoleColor.DarkRed; }
             }
+        }
 
         public Carnivoor() : base()
         {
