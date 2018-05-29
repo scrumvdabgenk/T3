@@ -161,12 +161,8 @@ namespace TerraTeam3
                     for (var lus = 0; lus < toeTeVoegenBabies; lus++)
                     {
                         var toeTeVoegenHerbivoor = new Herbivoor();
-                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
-                        Console.WriteLine("!!");
+                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);                        
                     }
-
-                    Console.WriteLine("aaa"+toeTeVoegenBabies+"bbb");
-
 
                     //planten ad random toegevoegd
                     var aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
