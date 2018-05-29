@@ -45,18 +45,20 @@ namespace TerraTeam3
                 return rnd.Next(1, MaxAantalPlantenBijvoegen);
             }
         }
+        public static int MinAantalLeeg {get;set;}
+        
 
 
         static Parameter()
         {
-            AantalRijen = 12;
-            AantalKolommen = 12;
+            AantalRijen = 6;
+            AantalKolommen = 6;
             StartLevenskracht = 1;
             MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 10;
             MaxAantalPlantenStart = AantalKolommen * AantalRijen / 10;
             MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 10;
             MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 10;
-
+            MinAantalLeeg = AantalKolommen * AantalRijen / 10;
         }
 
     }

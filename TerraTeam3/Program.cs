@@ -10,11 +10,11 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
-            Random rnd = new Random(); 
+            Random rnd = new Random();
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
             var aantalCarnivoren = Parameter.AantalCarnivoren;
-            int aantalPlantenBijvoegen;
+
 
             Matrix mijnMatrix = new Matrix();
 
@@ -65,7 +65,7 @@ namespace TerraTeam3
                     for (var x = 0; x < gesorteerdeMatrix.Count; x++)
                     {
                         var geselecteerditem = gesorteerdeMatrix[x];
-                        
+
                         var matrixItemBuurman = mijnMatrix.GeefBuurmanRechts(geselecteerditem);
 
                         if (matrixItemBuurman != null)
@@ -135,10 +135,10 @@ namespace TerraTeam3
                                 }
                                 else
                                 {
-                                    if (matrixItemMogelijkheden.Count()>1)
+                                    if (matrixItemMogelijkheden.Count() > 1)
                                     {
-                                    var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(1, matrixItemMogelijkheden.Count())];
-                                    mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                        var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(1, matrixItemMogelijkheden.Count())];
+                                        mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
                                     }
                                     //geselecteerditem.IsVeranderd = true;
                                 }
@@ -146,18 +146,42 @@ namespace TerraTeam3
 
                             }
                         }
-                        // TOETEVOEGEN BABIES TOEVOEGEN
-
+                    }
+                    mijnMatrix.GeefWeer();
+                    int aantalPlaatsen;
+                    //babies herbivoren toevoegen
+                    aantalPlaatsen = mijnMatrix.AantalLegePosities();
+                    //var aantalPlaatsen = 1;
+                    if (toeTeVoegenBabies > aantalPlaatsen)
+                    {
+                        toeTeVoegenBabies = aantalPlaatsen;
                     }
 
-                    aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
-                    for (var lus = 0; lus <= aantalPlanten; lus++)
+                    for (var lus = 0; lus < toeTeVoegenBabies; lus++)
+                    {
+                        var toeTeVoegenHerbivoor = new Herbivoor();
+                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
+                        Console.WriteLine("!!");
+                    }
+
+                    Console.WriteLine("aaa"+toeTeVoegenBabies+"bbb");
+
+
+                    //planten ad random toegevoegd
+                    var aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
+                    aantalPlaatsen = mijnMatrix.AantalLegePosities();
+                    //var aantalPlaatsen = 1;
+                    if (aantalPlantenBijvoegen > aantalPlaatsen - Parameter.MinAantalLeeg)
+                    {
+                        aantalPlantenBijvoegen = aantalPlaatsen - Parameter.MinAantalLeeg;
+                    }
+
+                    for (var lus = 0; lus < aantalPlantenBijvoegen; lus++)
                     {
                         var toeTeVoegenPlant = new Plant();
                         mijnMatrix.VoegItemToe(toeTeVoegenPlant);
                     }
-                    Console.WriteLine("rb: aantal planten toegevoegd "+aantalPlantenBijvoegen);
-                    mijnMatrix.GeefWeer();
+
                 }
             }
             while (input == "v");

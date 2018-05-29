@@ -158,8 +158,16 @@ if (item.Symbool=='C')
             }
         }
 
+        public int AantalLegePosities()
+        {
+            var test= (from item in Items
+                    where item.Symbool == '.'
+                    select item).ToList().Count();
+            return test;
+        }
+       
 
 
-        
+
     }
 }
