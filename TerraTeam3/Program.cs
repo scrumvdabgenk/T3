@@ -14,7 +14,7 @@ namespace TerraTeam3
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
             var aantalCarnivoren = Parameter.AantalCarnivoren;
-            int aantalPlantenBijvoegen;
+
 
             Matrix mijnMatrix = new Matrix();
 
@@ -126,24 +126,59 @@ namespace TerraTeam3
                             // Herbivoren en carnivoren bewegen
                             if ((geselecteerditem.Symbool == 'C' || geselecteerditem.Symbool == 'H') && matrixItemBuurman.Symbool == '.' && geselecteerditem.IsVeranderd == false)
                             {
-                                // Controle welke vrij is
-                                var matrixMogelijkePosities = mijnMatrix.geefLegePosities(geselecteerditem);
-
-                                if (matrixMogelijkePosities.Count() > 0)
+                                // controle welke vrij is
+                                var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
+                                if (matrixItemMogelijkheden.Count == 0)
                                 {
-                                    var randomGeselecteerdItem = matrixMogelijkePosities[rnd.Next(0, matrixMogelijkePosities.Count())];
-                                    mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
-                                    randomGeselecteerdItem.IsVeranderd = true;
+                                    mijnMatrix.Beweeg(geselecteerditem, matrixItemBuurman);
+                                    //geselecteerditem.IsVeranderd = true;
                                 }
-                                geselecteerditem.IsVeranderd = true;
+                                else
+                                {
+                                    if (matrixItemMogelijkheden.Count() > 0)
+                                    {
+                                        var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(0, matrixItemMogelijkheden.Count())];
+                                        mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                        randomGeselecteerdItem.IsVeranderd = true;
+                                    }
+                                    geselecteerditem.IsVeranderd = true;
+                                }
+
+
                             }
                         }
                     }
-                    // HH Babies toevoegen
-
-                    // Nieuwe planten toevoegen
-                    Console.Clear();
                     mijnMatrix.GeefWeer();
+                    int aantalPlaatsen;
+                    //babies herbivoren toevoegen
+                    aantalPlaatsen = mijnMatrix.AantalLegePosities();
+                    //var aantalPlaatsen = 1;
+                    if (toeTeVoegenBabies > aantalPlaatsen)
+                    {
+                        toeTeVoegenBabies = aantalPlaatsen;
+                    }
+
+                    for (var lus = 0; lus < toeTeVoegenBabies; lus++)
+                    {
+                        var toeTeVoegenHerbivoor = new Herbivoor();
+                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);                        
+                    }
+
+                    //planten ad random toegevoegd
+                    var aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
+                    aantalPlaatsen = mijnMatrix.AantalLegePosities();
+                    //var aantalPlaatsen = 1;
+                    if (aantalPlantenBijvoegen > aantalPlaatsen - Parameter.MinAantalLeeg)
+                    {
+                        aantalPlantenBijvoegen = aantalPlaatsen - Parameter.MinAantalLeeg;
+                    }
+
+                    for (var lus = 0; lus < aantalPlantenBijvoegen; lus++)
+                    {
+                        var toeTeVoegenPlant = new Plant();
+                        mijnMatrix.VoegItemToe(toeTeVoegenPlant);
+                    }
+
                 }
             }
             while (input == "v");

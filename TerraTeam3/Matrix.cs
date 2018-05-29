@@ -159,6 +159,14 @@ namespace TerraTeam3
             }
         }
 
+        public int AantalLegePosities()
+        {
+            var test= (from item in Items
+                    where item.Symbool == '.'
+                    select item).ToList().Count();
+            return test;
+        }
+       
 
 
 
