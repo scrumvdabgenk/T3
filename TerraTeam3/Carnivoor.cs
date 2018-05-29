@@ -13,12 +13,20 @@ namespace TerraTeam3
             this.Naam = naam;
             
         }
+        public override ConsoleColor Kleur
+        {
+            get
+            {
+                if (Levenskracht < 3)
+                { return ConsoleColor.Red; }
+                else
+                { return ConsoleColor.DarkRed; }
+            }
 
         public Carnivoor() : base()
         {
             this.Symbool = 'C';
             this.Levenskracht = Parameter.StartLevenskracht;
         }
-
     }
 }

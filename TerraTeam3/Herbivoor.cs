@@ -14,11 +14,20 @@ namespace TerraTeam3
             
         }
 
+        public override ConsoleColor Kleur
+        {
+            get
+            {
+                if (Levenskracht < 3)
+                { return ConsoleColor.Magenta; }
+                else
+                { return ConsoleColor.DarkMagenta; }
+            }
+
         public Herbivoor() : base()
         {
             this.Symbool = 'H';
             this.Levenskracht = Parameter.StartLevenskracht;
         }
-
     }
 }
