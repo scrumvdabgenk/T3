@@ -13,7 +13,6 @@ namespace TerraTeam3
         {
             this.Levenskracht = Parameter.StartLevenskracht;
             this.Symbool = Parameter.MensTeken;
-
         }
 
         public override ConsoleColor Kleur
@@ -21,11 +20,12 @@ namespace TerraTeam3
             get
             {
                 if (Levenskracht < 3)
-                { return Parameter.MensStandaardKleur; }
+                {
+                    return Parameter.MensStandaardKleur;
+                }
                 else
                 { return Parameter.MensSterkKleur; }
             }
         }
-
     }
 }

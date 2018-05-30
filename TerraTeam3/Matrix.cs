@@ -67,29 +67,35 @@ namespace TerraTeam3
                 kolomTeller++;
 
                 int levenskracht = 0;
+
                 if (item.Symbool == Parameter.HerbivoorTeken)
-                //if (item.Symbool == 'H')
                 {
                     Herbivoor geselecteerdItem = (Herbivoor)item;
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
                 if (item.Symbool == Parameter.CarnivoorTeken)
-                //if (item.Symbool == 'C')
                 {
                     Carnivoor geselecteerdItem = (Carnivoor)item;
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
+                if (item.Symbool == Parameter.MensTeken)
+                {
+                    Mens geselecteerdItem = (Mens)item;
+                    levenskracht = geselecteerdItem.Levenskracht;
+                }
+
                 Console.ForegroundColor = item.Kleur;
 
-                if (item.GetType() == typeof(Herbivoor) || item.GetType() == typeof(Carnivoor) || item.GetType() == typeof(Mens))
+                if (item.GetType() != typeof(Plant) && item.GetType() != typeof(LeegItem))
                 {
-                    Console.Write(item.Symbool + " (" + levenskracht + ") ");
+                    string symboolEnLevenskracht = item.Symbool + "(" + levenskracht + ")";
+                    Console.Write("{0,-6}", symboolEnLevenskracht);
                 }
                 else
                 {
-                    Console.Write(item.Symbool + "     ");
+                    Console.Write("{0,-6}", item.Symbool);
                 }
 
                 Console.ForegroundColor = ConsoleColor.White;
@@ -164,14 +170,10 @@ namespace TerraTeam3
 
         public int AantalLegePosities()
         {
-            var test= (from item in Items
-                    where item.Symbool == '.'
-                    select item).ToList().Count();
+            var test = (from item in Items
+                        where item.Symbool == '.'
+                        select item).ToList().Count();
             return test;
         }
-       
-
-
-
     }
 }

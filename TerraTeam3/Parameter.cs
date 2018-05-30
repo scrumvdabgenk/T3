@@ -32,6 +32,7 @@ namespace TerraTeam3
         public static char LeegItemTeken { get; set; }
         public static char HerbivoorTeken { get; set; }
         public static char CarnivoorTeken { get; set; }
+
         public static int AantalPlanten
         {
             get
@@ -44,7 +45,8 @@ namespace TerraTeam3
         {
             get
             {
-                return rnd.Next(1, MaxAantalHerbivorenStart);
+                return 1;
+                // return rnd.Next(1, MaxAantalHerbivorenStart);
             }
         }
 
@@ -52,7 +54,8 @@ namespace TerraTeam3
         {
             get
             {
-                return rnd.Next(1, MaxAantalCarnivorenStart);
+                return 5;
+                // return rnd.Next(1, MaxAantalCarnivorenStart);
             }
         }
 
@@ -60,7 +63,8 @@ namespace TerraTeam3
         {
             get
             {
-                return rnd.Next(1, MaxAantalMensenStart);
+                //   return rnd.Next(1, MaxAantalMensenStart);
+                return 5;
             }
         }
 
@@ -71,9 +75,8 @@ namespace TerraTeam3
                 return rnd.Next(1, MaxAantalPlantenBijvoegen);
             }
         }
-        public static int MinAantalLeeg {get;set;}
-        
 
+        public static int MinAantalLeeg {get;set;}
 
         static Parameter()
         {
@@ -93,12 +96,12 @@ namespace TerraTeam3
             AantalRijen = 12;
             AantalKolommen = 12;
             StartLevenskracht = 1;
-            MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 15;
-            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 20;
-            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 20;
-            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 20;
-            MaxAantalMensenStart = AantalKolommen * AantalRijen / 20;
-            MinAantalLeeg = AantalKolommen * AantalRijen / 20;
+            MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 20;
+            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 15;
+            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 5;
+            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 5;
+            MaxAantalMensenStart = AantalKolommen * AantalRijen / 5;
+            MinAantalLeeg = AantalKolommen * AantalRijen / 15;
         }
     }
 }
