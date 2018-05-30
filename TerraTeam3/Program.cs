@@ -10,6 +10,9 @@ namespace TerraTeam3
     {
         static void Main(string[] args)
         {
+            Console.WindowHeight = 80;
+
+            // Startwaardes
             Random rnd = new Random();
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
@@ -17,39 +20,52 @@ namespace TerraTeam3
             var aantalMensen = Parameter.AantalMensen;
 
 
-            Matrix mijnMatrix = new Matrix();
+            // Onze matrix van "vandaag"
+            Matrix laatsteMatrix = new Matrix();
 
+            // Onze matrix van "gisteren" - Leeg in startsituatie
+            Matrix voorgaandeMatrix = new Matrix();
 
             // Aanmaken planten
             for (var lus = 0; lus < aantalPlanten; lus++)
             {
                 var toeTeVoegenPlant = new Plant();
-                mijnMatrix.VoegItemToe(toeTeVoegenPlant);
+                laatsteMatrix.VoegItemToe(toeTeVoegenPlant);
             }
 
             // Aanmaken herbivoren
             for (var lus = 0; lus < aantalHerbivoren; lus++)
             {
                 var toeTeVoegenHerbivoor = new Herbivoor();
-                mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
+                laatsteMatrix.VoegItemToe(toeTeVoegenHerbivoor);
             }
 
             // Aanmaken carnivoren
             for (var lus = 0; lus < aantalCarnivoren; lus++)
             {
                 var toeTeVoegenCarnivoor = new Carnivoor();
-                mijnMatrix.VoegItemToe(toeTeVoegenCarnivoor);
+                laatsteMatrix.VoegItemToe(toeTeVoegenCarnivoor);
             }
 
             // Aanmaken mensen
+            // SELECTIE OP BASIS VAN TIJDSLIJN HIERONDER
+            // if (tijdslijnMensAanwezig == true) {
             for (var lus = 0; lus < aantalMensen; lus++)
             {
                 var toeTeVoegenMens = new Mens();
-                mijnMatrix.VoegItemToe(toeTeVoegenMens);
+                laatsteMatrix.VoegItemToe(toeTeVoegenMens);
             }
+            // }
 
             // Eerste weergave
-            mijnMatrix.GeefWeer();
+            // De matrix van "gisteren" weergeven - Leeg in startsituatie
+            geefSituatieWeer(voorgaandeMatrix, "Vorige situatie:");
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            // De matrix van "vandaag" weergeven
+            geefSituatieWeer(laatsteMatrix, "Huidige situatie:");
 
             string input;
 
@@ -71,16 +87,23 @@ namespace TerraTeam3
 
                 if (input == "v")
                 {
-                    var gesorteerdeMatrix = mijnMatrix.GeefGesorteerdeLijst();
-                    int toeTeVoegenBabies = 0;
+                    // Scherm leegmaken
+                    Console.Clear();
 
-                    mijnMatrix.ResetIsVeranderd();
+                    // Matrix van gisteren weergeven
+                    geefSituatieWeer(laatsteMatrix, "Vorige situatie:");
+
+                    var gesorteerdeMatrix = laatsteMatrix.GeefGesorteerdeLijst();
+                    int toeTeVoegenHerbivorenBabies = 0;
+                    int toeTeVoegenMensenBabies = 0;
+
+                    laatsteMatrix.ResetIsVeranderd();
 
                     for (var x = 0; x < gesorteerdeMatrix.Count; x++)
                     {
                         var geselecteerditem = gesorteerdeMatrix[x];
 
-                        var matrixItemBuurman = mijnMatrix.GeefBuurmanRechts(geselecteerditem);
+                        var matrixItemBuurman = laatsteMatrix.GeefBuurmanRechts(geselecteerditem);
 
                         if (matrixItemBuurman != null)
                         {
@@ -93,7 +116,7 @@ namespace TerraTeam3
                                 matrixItemBuurman.IsVeranderd = true;
                                 geselecteerditem.IsVeranderd = true;
 
-                                mijnMatrix.Beweeg(geselecteerdeHerbivoor, matrixItemBuurman);
+                                laatsteMatrix.Beweeg(geselecteerdeHerbivoor, matrixItemBuurman);
                             }
 
                             // Carnivoor eet herbivoor
@@ -107,13 +130,13 @@ namespace TerraTeam3
 
                                 geselecteerdeCarnivoor.Levenskracht += buurmanHerbivoor.Levenskracht;
 
-                                mijnMatrix.Beweeg(geselecteerdeCarnivoor, buurmanHerbivoor);
+                                laatsteMatrix.Beweeg(geselecteerdeCarnivoor, buurmanHerbivoor);
                             }
 
                             // Herbivoor vrijt met herbivoor
                             if (geselecteerditem.Symbool == Parameter.HerbivoorTeken && matrixItemBuurman.Symbool == Parameter.HerbivoorTeken)
                             {
-                                toeTeVoegenBabies++;
+                                toeTeVoegenHerbivorenBabies++;
                             }
 
 
@@ -128,14 +151,36 @@ namespace TerraTeam3
                                     speler1.IsVeranderd = true;
 
                                     speler1.Levenskracht += speler2.Levenskracht;
-                                    mijnMatrix.Beweeg(speler1, speler2);
+                                    laatsteMatrix.Beweeg(speler1, speler2);
                                 }
                                 else if (speler1.Levenskracht < speler2.Levenskracht)
                                 {
                                     speler2.Levenskracht += speler1.Levenskracht;
-                                    mijnMatrix.VerwijderItem(speler1);
+                                    laatsteMatrix.VerwijderItem(speler1);
                                 }
                             }
+
+                            // Carnivoor vecht met mens
+                            if (geselecteerditem.Symbool == Parameter.CarnivoorTeken && matrixItemBuurman.Symbool == Parameter.MensTeken && geselecteerditem.IsVeranderd == false)
+                            {
+                                var speler1 = (Carnivoor)geselecteerditem;
+                                var speler2 = (Mens)matrixItemBuurman;
+
+                                if (speler1.Levenskracht > speler2.Levenskracht)
+                                {
+                                    speler1.IsVeranderd = true;
+
+                                    speler1.Levenskracht += speler2.Levenskracht;
+                                    laatsteMatrix.Beweeg(speler1, speler2);
+                                }
+                                else
+                                //if (speler1.Levenskracht <= speler2.Levenskracht)
+                                {
+                                    speler2.Levenskracht += speler1.Levenskracht;
+                                    laatsteMatrix.VerwijderItem(speler1);
+                                }
+                            }
+
 
                             // Mens vecht met carnivoor
                             if (geselecteerditem.Symbool == Parameter.MensTeken && matrixItemBuurman.Symbool == Parameter.CarnivoorTeken && geselecteerditem.IsVeranderd == false)
@@ -146,27 +191,34 @@ namespace TerraTeam3
                                 if (speler1.Levenskracht >= speler2.Levenskracht)
                                 {
                                     speler1.IsVeranderd = true;
-
+                                    // ADDED
+                                    speler2.IsVeranderd = true;
                                     speler1.Levenskracht += speler2.Levenskracht;
-                                    mijnMatrix.Beweeg(speler1, speler2);
+                                    laatsteMatrix.Beweeg(speler1, speler2);
                                 }
                                 else if (speler1.Levenskracht < speler2.Levenskracht)
                                 {
                                     speler2.Levenskracht += speler1.Levenskracht;
-                                    mijnMatrix.VerwijderItem(speler1);
+                                    laatsteMatrix.VerwijderItem(speler1);
                                 }
+                            }
+
+                            // Mens vrijt met Mens
+                            if (geselecteerditem.Symbool == Parameter.MensTeken && matrixItemBuurman.Symbool == Parameter.MensTeken)
+                            {
+                                toeTeVoegenMensenBabies++;
                             }
 
                             // Herbivoren, carnivoren en mensen bewegen
                             if ((geselecteerditem.Symbool == Parameter.CarnivoorTeken || geselecteerditem.Symbool == Parameter.HerbivoorTeken || geselecteerditem.Symbool == Parameter.MensTeken) && matrixItemBuurman.Symbool == Parameter.LeegItemTeken && geselecteerditem.IsVeranderd == false)
                             {
                                 // Controle welke plaatse rondom vrij is
-                                var matrixItemMogelijkheden = mijnMatrix.geefLegePosities(geselecteerditem);
+                                var matrixItemMogelijkheden = laatsteMatrix.geefLegePosities(geselecteerditem);
 
                                 if (matrixItemMogelijkheden.Count() > 0)
                                 {
                                     var randomGeselecteerdItem = matrixItemMogelijkheden[rnd.Next(0, matrixItemMogelijkheden.Count())];
-                                    mijnMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
+                                    laatsteMatrix.Beweeg(geselecteerditem, randomGeselecteerdItem);
                                     randomGeselecteerdItem.IsVeranderd = true;
                                 }
                                 geselecteerditem.IsVeranderd = true;
@@ -175,28 +227,44 @@ namespace TerraTeam3
                         }
                     }
 
-                    
+
 
                     int aantalPlaatsen;
 
                     // Babies herbivoren toevoegen
-                    aantalPlaatsen = mijnMatrix.AantalLegePosities();
+                    aantalPlaatsen = laatsteMatrix.AantalLegePosities();
 
-                    if (toeTeVoegenBabies > aantalPlaatsen)
+                    if (toeTeVoegenHerbivorenBabies > aantalPlaatsen)
                     {
-                        toeTeVoegenBabies = aantalPlaatsen;
+                        toeTeVoegenHerbivorenBabies = aantalPlaatsen;
                     }
 
-                    for (var lus = 0; lus < toeTeVoegenBabies; lus++)
+                    for (var lus = 0; lus < toeTeVoegenHerbivorenBabies; lus++)
                     {
                         var toeTeVoegenHerbivoor = new Herbivoor();
                         toeTeVoegenHerbivoor.Levenskracht = 0;
-                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
+                        laatsteMatrix.VoegItemToe(toeTeVoegenHerbivoor);
+                    }
+
+
+                    // Babies mensen toevoegen
+                    aantalPlaatsen = laatsteMatrix.AantalLegePosities();
+
+                    if (toeTeVoegenMensenBabies > aantalPlaatsen)
+                    {
+                        toeTeVoegenMensenBabies = aantalPlaatsen;
+                    }
+
+                    for (var lus = 0; lus < toeTeVoegenMensenBabies; lus++)
+                    {
+                        var toeTeVoegenMens = new Mens();
+                        toeTeVoegenMens.Levenskracht = 1;
+                        laatsteMatrix.VoegItemToe(toeTeVoegenMens);
                     }
 
                     // Planten ad random toevoegen
                     var aantalPlantenBijvoegen = Parameter.AantalPlantenBijvoegen;
-                    aantalPlaatsen = mijnMatrix.AantalLegePosities();
+                    aantalPlaatsen = laatsteMatrix.AantalLegePosities();
 
                     if (aantalPlantenBijvoegen > aantalPlaatsen - Parameter.MinAantalLeeg)
                     {
@@ -206,15 +274,28 @@ namespace TerraTeam3
                     for (var lus = 0; lus < aantalPlantenBijvoegen; lus++)
                     {
                         var toeTeVoegenPlant = new Plant();
-                        mijnMatrix.VoegItemToe(toeTeVoegenPlant);
+                        laatsteMatrix.VoegItemToe(toeTeVoegenPlant);
                     }
 
 
-                    Console.Clear();
-                    mijnMatrix.GeefWeer();
+                    Console.WriteLine();
+                    Console.WriteLine();
+
+                    // De matrix van "vandaag" weergeven
+                    geefSituatieWeer(laatsteMatrix, "Huidige situatie:");
                 }
             }
             while (input == "v");
+        }
+
+
+        // Method om Matrix weer te geven
+        public static void geefSituatieWeer(Matrix mijnMatrix, string titel)
+        {
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(titel);
+            Console.WriteLine();
+            mijnMatrix.GeefWeer();
         }
     }
 }
