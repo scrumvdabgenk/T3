@@ -297,7 +297,7 @@ namespace TerraTeam3
                         //using (var bestand = File.Open(@"C:\Users\net06\Desktop\Terrarium.obj", FileMode.OpenOrCreate))
                         {
                             var schrijverMatrix = new BinaryFormatter();
-                            schrijverMatrix.Serialize(bestand, mijnMatrix.Items);                            
+                            schrijverMatrix.Serialize(bestand, laatsteMatrix.Items);                            
                         }
                         Console.WriteLine("Uw spel werd opgeslagen");
                     }
@@ -324,8 +324,8 @@ namespace TerraTeam3
                             var lezerMatrix = new BinaryFormatter();
                             List<MatrixItem> nieuweItems;
                             nieuweItems = (List<MatrixItem>)lezerMatrix.Deserialize(bestand);
-                            mijnMatrix.Items = nieuweItems;
-                            mijnMatrix.GeefWeer();
+                            laatsteMatrix.Items = nieuweItems;
+                            geefSituatieWeer(laatsteMatrix, "Opgeslagen spel:");
                         }
                     }
                     catch (SerializationException)
