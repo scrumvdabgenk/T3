@@ -13,7 +13,7 @@ namespace TerraTeam3
 
     class Program
     {
-        
+
         private static Timer aTimer;
         private static bool tijdOverschreden = false;
 
@@ -27,7 +27,6 @@ namespace TerraTeam3
         public static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             tijdOverschreden = true;
-            Console.WriteLine("tijd");
         }
 
         static void Main(string[] args)
@@ -90,25 +89,21 @@ namespace TerraTeam3
             // De matrix van "vandaag" weergeven
             geefSituatieWeer(laatsteMatrix, "Huidige situatie:");
 
-            
+
             string input = ".";
 
             do
             {
                 tijdOverschreden = false;
-                
-                
+                do
+                {
+
                     Console.WriteLine();
                     Console.WriteLine("Geef een commando:");
                     Console.WriteLine("- v + enter om de volgende dag te zien");
                     Console.WriteLine("- s + enter om te stoppen");
                     Console.WriteLine("- o + enter om op te slaan");
                     Console.WriteLine("- l + enter om een opgeslagen spel te laden");
-                    input = Console.ReadLine();
-
-            
-                    
-
                     while (!Console.KeyAvailable && !tijdOverschreden)
                     { }
                     if (!tijdOverschreden)
@@ -315,20 +310,20 @@ namespace TerraTeam3
 
                     Console.WriteLine();
                     Console.WriteLine();
-
                     // De matrix van "vandaag" weergeven
                     geefSituatieWeer(laatsteMatrix, "Huidige situatie:");
                 }
 
                 if (input == "o")
                 {
+                    input = ".";
                     try
                     {
-                        using (var bestand = File.Open(@"C:\Data\Terrarium.obj", FileMode.OpenOrCreate))
+                        using (var bestand = File.Open(@"Terrarium.obj", FileMode.OpenOrCreate))
                         //using (var bestand = File.Open(@"C:\Users\net06\Desktop\Terrarium.obj", FileMode.OpenOrCreate))
                         {
                             var schrijverMatrix = new BinaryFormatter();
-                            schrijverMatrix.Serialize(bestand, laatsteMatrix.Items);                            
+                            schrijverMatrix.Serialize(bestand, laatsteMatrix.Items);
                         }
                         Console.WriteLine("Uw spel werd opgeslagen");
                     }
@@ -346,10 +341,11 @@ namespace TerraTeam3
 
                 if (input == "l")
                 {
+                    input = ".";
                     Console.Clear();
                     try
                     {
-                        using (var bestand = File.Open(@"C:\Data\Terrarium.obj", FileMode.OpenOrCreate))
+                        using (var bestand = File.Open(@"Terrarium.obj", FileMode.OpenOrCreate))
                         //using (var bestand = File.Open(@"C:\Users\net06\Desktop\Terrarium.obj", FileMode.Open, FileAccess.Read))
                         {
                             var lezerMatrix = new BinaryFormatter();
@@ -369,13 +365,13 @@ namespace TerraTeam3
                         Console.WriteLine("Djuu, het lukt nie!/n" + ex.Message);
                         Console.Read();
                     }
+
                 }
-            tijdOverschreden = false;
+
+                    tijdOverschreden = false;
             }
             while (input != "s");
-                        
         }
-
 
         // Method om Matrix weer te geven
         public static void geefSituatieWeer(Matrix mijnMatrix, string titel)
@@ -385,9 +381,6 @@ namespace TerraTeam3
             Console.WriteLine();
             mijnMatrix.GeefWeer();
         }
-
-        
-
     }
 }
 

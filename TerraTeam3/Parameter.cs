@@ -98,10 +98,10 @@ namespace TerraTeam3
             StartLevenskracht = 1;
             MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 20;
             MaxAantalPlantenStart = AantalKolommen * AantalRijen / 15;
-            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 5;
-            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 5;
-            MaxAantalMensenStart = AantalKolommen * AantalRijen / 5;
-            MinAantalLeeg = AantalKolommen * AantalRijen / 15;
+            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 3;
+            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 3;
+            MaxAantalMensenStart = AantalKolommen * AantalRijen / 3;
+            MinAantalLeeg = AantalKolommen * AantalRijen / 5;
         }
     }
 }
