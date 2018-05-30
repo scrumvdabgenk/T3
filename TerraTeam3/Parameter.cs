@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public static class Parameter
     {
         static Random rnd = new Random();
@@ -16,7 +17,22 @@ namespace TerraTeam3
         public static int MaxAantalPlantenStart { get; set; }
         public static int MaxAantalHerbivorenStart { get; set; }
         public static int MaxAantalCarnivorenStart { get; set; }
-        public static int AantalPosities { get; set; } 
+        public static int MaxAantalMensenStart { get; set; }
+        public static int AantalPosities { get; set; }
+        public static ConsoleColor PlantKleur { get; set; }
+        public static ConsoleColor LeegItemKleur { get; set; }
+        public static ConsoleColor HerbivoorStandaardKleur { get; set; }
+        public static ConsoleColor HerbivoorSterkKleur { get; set; }
+        public static ConsoleColor CarnivoorStandaardKleur { get; set; }
+        public static ConsoleColor CarnivoorSterkKleur { get; set; }
+        public static ConsoleColor MensStandaardKleur { get; set; }
+        public static ConsoleColor MensSterkKleur { get; set; }
+        public static char MensTeken { get; set; }
+        public static char PlantTeken { get; set; }
+        public static char LeegItemTeken { get; set; }
+        public static char HerbivoorTeken { get; set; }
+        public static char CarnivoorTeken { get; set; }
+
         public static int AantalPlanten
         {
             get
@@ -29,7 +45,8 @@ namespace TerraTeam3
         {
             get
             {
-                return rnd.Next(1, MaxAantalHerbivorenStart);
+                return 1;
+                // return rnd.Next(1, MaxAantalHerbivorenStart);
             }
         }
 
@@ -37,9 +54,20 @@ namespace TerraTeam3
         {
             get
             {
-                return rnd.Next(1, MaxAantalCarnivorenStart);
+                return 5;
+                // return rnd.Next(1, MaxAantalCarnivorenStart);
             }
         }
+
+        public static int AantalMensen
+        {
+            get
+            {
+                //   return rnd.Next(1, MaxAantalMensenStart);
+                return 5;
+            }
+        }
+
         public static int AantalPlantenBijvoegen
         {
             get
@@ -47,20 +75,33 @@ namespace TerraTeam3
                 return rnd.Next(1, MaxAantalPlantenBijvoegen);
             }
         }
-        public static int MinAantalLeeg {get;set;}
-        
 
+        public static int MinAantalLeeg {get;set;}
 
         static Parameter()
         {
-            AantalRijen = 6;
-            AantalKolommen = 6;
+            MensTeken = 'M';
+            LeegItemTeken = '.';
+            PlantTeken = 'P';
+            HerbivoorTeken = 'H';
+            CarnivoorTeken = 'C';
+            MensSterkKleur = ConsoleColor.DarkYellow;
+            MensStandaardKleur = ConsoleColor.Yellow;
+            CarnivoorStandaardKleur = ConsoleColor.DarkRed;
+            CarnivoorSterkKleur = ConsoleColor.Red;
+            HerbivoorSterkKleur = ConsoleColor.Magenta;
+            HerbivoorStandaardKleur = ConsoleColor.DarkMagenta;
+            LeegItemKleur = ConsoleColor.Gray;
+            PlantKleur = ConsoleColor.Green;
+            AantalRijen = 12;
+            AantalKolommen = 12;
             StartLevenskracht = 1;
-            MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 10;
-            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 10;
-            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 10;
-            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 10;
-            MinAantalLeeg = AantalKolommen * AantalRijen / 10;
+            MaxAantalPlantenBijvoegen = AantalRijen * AantalKolommen / 20;
+            MaxAantalPlantenStart = AantalKolommen * AantalRijen / 15;
+            MaxAantalHerbivorenStart = AantalKolommen * AantalRijen / 5;
+            MaxAantalCarnivorenStart = AantalKolommen * AantalRijen / 5;
+            MaxAantalMensenStart = AantalKolommen * AantalRijen / 5;
+            MinAantalLeeg = AantalKolommen * AantalRijen / 15;
         }
     }
 }

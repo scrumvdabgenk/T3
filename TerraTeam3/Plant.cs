@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public class Plant:MatrixItem
     {
         //public Plant(string naam, ConsoleColor plantKleur)
@@ -15,12 +16,12 @@ namespace TerraTeam3
         //}
         public Plant()
         {
-            this.Symbool = 'P';
+            this.Symbool = Parameter.PlantTeken;
         }
         public override ConsoleColor Kleur
         {
             get
-            { return ConsoleColor.Green; }
+            { return Parameter.PlantKleur; }
         }
     }
 }

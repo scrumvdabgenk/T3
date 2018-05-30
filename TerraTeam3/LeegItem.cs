@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public class LeegItem: MatrixItem
     {
         //public LeegItem(string naam, ConsoleColor leegItemKleur)
@@ -14,12 +15,12 @@ namespace TerraTeam3
         //}
         public LeegItem()
         {
-            this.Symbool = '.';
+            this.Symbool = Parameter.LeegItemTeken;
         }
         public override ConsoleColor Kleur
         {
             get
-            { return ConsoleColor.Gray; }
+            { return Parameter.LeegItemKleur; }
         }
     }
 }

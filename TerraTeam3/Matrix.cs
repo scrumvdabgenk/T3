@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public class Matrix
     {
         //private int aantalRijen;
@@ -25,7 +26,7 @@ namespace TerraTeam3
                 {
                     LeegItem leegItem = new LeegItem();
                     leegItem.PosX = x;
-                    leegItem.PosY = y;                  
+                    leegItem.PosY = y;
                     VulMatrixToe(leegItem);
 
                 }
@@ -66,32 +67,37 @@ namespace TerraTeam3
                 kolomTeller++;
 
                 int levenskracht = 0;
-                if (item.Symbool == 'H')
+
+                if (item.Symbool == Parameter.HerbivoorTeken)
                 {
                     Herbivoor geselecteerdItem = (Herbivoor)item;
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
-                if (item.Symbool == 'C')
+                if (item.Symbool == Parameter.CarnivoorTeken)
                 {
                     Carnivoor geselecteerdItem = (Carnivoor)item;
                     levenskracht = geselecteerdItem.Levenskracht;
                 }
 
-                //if (item.Symbool == 'P')  TEST KLEUREN MAANDAG
-                //                {
-                //                    Console.ForegroundColor = ConsoleColor.Green;
-                //                }
-                //if (item.Symbool=='C')
-                //                {
-                //                    Console.ForegroundColor = ConsoleColor.Red;
-                //                }
-                //                if (item.Symbool == 'H')
-                //                {
-                //                    Console.ForegroundColor = ConsoleColor.Blue;
-                //                }
+                if (item.Symbool == Parameter.MensTeken)
+                {
+                    Mens geselecteerdItem = (Mens)item;
+                    levenskracht = geselecteerdItem.Levenskracht;
+                }
+
                 Console.ForegroundColor = item.Kleur;
-                Console.Write(item.Symbool + "("+levenskracht+")  ");
+
+                if (item.GetType() != typeof(Plant) && item.GetType() != typeof(LeegItem))
+                {
+                    string symboolEnLevenskracht = item.Symbool + "(" + levenskracht + ")";
+                    Console.Write("{0,-6}", symboolEnLevenskracht);
+                }
+                else
+                {
+                    Console.Write("{0,-6}", item.Symbool);
+                }
+
                 Console.ForegroundColor = ConsoleColor.White;
                 if (kolomTeller == Parameter.AantalKolommen)
                 {
@@ -117,7 +123,7 @@ namespace TerraTeam3
                                where (item.PosY == startItem.PosY - 1 && item.PosX == startItem.PosX) && item.Symbool == '.' ||
                                (item.PosY == startItem.PosY && item.PosX == startItem.PosX - 1) && item.Symbool == '.' ||
                                (item.PosY == startItem.PosY && item.PosX == startItem.PosX + 1) && item.Symbool == '.' ||
-                               (item.PosY == startItem.PosY +1 && item.PosX == startItem.PosX) && item.Symbool == '.'
+                               (item.PosY == startItem.PosY + 1 && item.PosX == startItem.PosX) && item.Symbool == '.'
                                select item).ToList();
             return vrijePLaats;
 
@@ -164,14 +170,10 @@ namespace TerraTeam3
 
         public int AantalLegePosities()
         {
-            var test= (from item in Items
-                    where item.Symbool == '.'
-                    select item).ToList().Count();
+            var test = (from item in Items
+                        where item.Symbool == '.'
+                        select item).ToList().Count();
             return test;
         }
-       
-
-
-
     }
 }

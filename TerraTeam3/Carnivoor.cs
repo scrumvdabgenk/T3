@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraTeam3
-{
+{   [Serializable]
     public class Carnivoor : Fauna
     {
         public Carnivoor(string naam) : base()
@@ -18,15 +18,15 @@ namespace TerraTeam3
             get
             {
                 if (Levenskracht < 3)
-                { return ConsoleColor.Red; }
+                { return Parameter.CarnivoorStandaardKleur; }
                 else
-                { return ConsoleColor.DarkRed; }
+                { return Parameter.CarnivoorSterkKleur; }
             }
         }
 
         public Carnivoor() : base()
         {
-            this.Symbool = 'C';
+            this.Symbool = Parameter.CarnivoorTeken;
             this.Levenskracht = Parameter.StartLevenskracht;
         }
     }

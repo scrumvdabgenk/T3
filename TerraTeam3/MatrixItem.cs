@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public abstract class MatrixItem
     {
         public string Naam { get; set; }

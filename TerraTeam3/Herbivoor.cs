@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public class Herbivoor : Fauna
     {
-        public Herbivoor(string naam) : base()
+        public Herbivoor(string naam)
         {
-            this.Naam = naam;
-            
+            this.Naam = naam;            
         }
 
         public override ConsoleColor Kleur
@@ -19,15 +19,15 @@ namespace TerraTeam3
             get
             {
                 if (Levenskracht < 3)
-                { return ConsoleColor.Magenta; }
+                { return Parameter.HerbivoorStandaardKleur; }
                 else
-                { return ConsoleColor.DarkMagenta; }
+                { return Parameter.HerbivoorSterkKleur; }
             }
         }
 
         public Herbivoor() : base()
         {
-            this.Symbool = 'H';
+            this.Symbool = Parameter.HerbivoorTeken;
             this.Levenskracht = Parameter.StartLevenskracht;
         }
     }
