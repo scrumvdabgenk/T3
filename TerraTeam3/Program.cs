@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace TerraTeam3
 {
+
     class Program
     {
         static void Main(string[] args)
@@ -65,7 +69,7 @@ namespace TerraTeam3
                     Console.WriteLine("- l + enter om een opgeslagen spel te laden");
                     input = Console.ReadLine();
 
-                } while (input != "v" && input != "s");
+                } while (input != "v" && input != "s" && input != "o" && input != "l");
 
                 Console.WriteLine();
 
@@ -213,8 +217,61 @@ namespace TerraTeam3
                     Console.Clear();
                     mijnMatrix.GeefWeer();
                 }
+
+                if (input == "o")
+                {
+                    try
+                    {
+                        using (var bestand = File.Open(@"C:\Data\Terrarium.obj", FileMode.OpenOrCreate))
+                        //using (var bestand = File.Open(@"C:\Users\net06\Desktop\Terrarium.obj", FileMode.OpenOrCreate))
+                        {
+                            var schrijverMatrix = new BinaryFormatter();
+                            schrijverMatrix.Serialize(bestand, mijnMatrix.Items);                            
+                        }
+                        Console.WriteLine("Uw spel werd opgeslagen");
+                    }
+                    catch (SerializationException)
+                    {
+                        Console.WriteLine("Fout bij het opslaan van de matrix");
+                        Console.Read();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("User error, please replace user\n" + ex.Message);
+                        Console.Read();
+                    }
+                }
+
+                if (input == "l")
+                {
+                    Console.Clear();
+                    try
+                    {
+                        using (var bestand = File.Open(@"C:\Data\Terrarium.obj", FileMode.OpenOrCreate))
+                        //using (var bestand = File.Open(@"C:\Users\net06\Desktop\Terrarium.obj", FileMode.Open, FileAccess.Read))
+                        {
+                            var lezerMatrix = new BinaryFormatter();
+                            List<MatrixItem> nieuweItems;
+                            nieuweItems = (List<MatrixItem>)lezerMatrix.Deserialize(bestand);
+                            mijnMatrix.Items = nieuweItems;
+                            mijnMatrix.GeefWeer();
+                        }
+                    }
+                    catch (SerializationException)
+                    {
+                        Console.WriteLine("Fout bij het openen van de opgeslagen matrix");
+                        Console.Read();
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Djuu, het lukt nie!/n" + ex.Message);
+                        Console.Read();
+                    }
+                }
+
             }
-            while (input == "v");
+            while (input == "v" || input == "o" || input == "l");
+                        
         }
     }
 }

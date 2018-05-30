@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTeam3
 {
+    [Serializable]
     public class Herbivoor : Fauna
     {
         public Herbivoor(string naam)

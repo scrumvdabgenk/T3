@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TerraTeam3
-{
+{   [Serializable]
     public class Carnivoor : Fauna
     {
         public Carnivoor(string naam) : base()
