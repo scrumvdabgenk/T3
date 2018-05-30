@@ -3,21 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace TerraTeam3
 {
     class Program
     {
+        
+        private static Timer aTimer;
+        private static bool tijdOverschreden = false;
+
+        public static void SetTimer()
+        {
+            aTimer = new Timer(2000);
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+        public static void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            tijdOverschreden = true;
+            Console.WriteLine("tijd");
+        }
+
         static void Main(string[] args)
         {
-            Random rnd = new Random();
             var aantalPlanten = Parameter.AantalPlanten;
             var aantalHerbivoren = Parameter.AantalHerbivoren;
             var aantalCarnivoren = Parameter.AantalCarnivoren;
-
-
+            Random rnd = new Random();
             Matrix mijnMatrix = new Matrix();
 
+            SetTimer();
 
             for (var lus = 0; lus < aantalPlanten; lus++)
             {
@@ -39,23 +56,31 @@ namespace TerraTeam3
 
             mijnMatrix.GeefWeer();
 
-            string input;
+            string input = ".";
 
             do
             {
+                tijdOverschreden = false;
                 do
                 {
                     Console.WriteLine();
                     Console.WriteLine("Geef een commando:");
-                    Console.WriteLine("- v + enter om de volgende dag te zien");
-                    Console.WriteLine("- s + enter om te stoppen");
-                    input = Console.ReadLine();
+                    Console.WriteLine("- v + ENTER om de volgende dag te zien");
+                    Console.WriteLine("    of wachten");
+                    Console.WriteLine("- s + ENTER om te stoppen");
 
-                } while (input != "v" && input != "s");
+                    while (!Console.KeyAvailable && !tijdOverschreden)
+                    { }
+                    if (!tijdOverschreden)
+                    {
+                        input = Console.ReadLine();
+                    }
+                }
+                while (input != "v" && input != "s" && !tijdOverschreden);
 
                 Console.WriteLine();
 
-                if (input == "v")
+                if (input == "v" || tijdOverschreden)
                 {
                     var gesorteerdeMatrix = mijnMatrix.GeefGesorteerdeLijst();
                     int toeTeVoegenBabies = 0;
@@ -161,7 +186,7 @@ namespace TerraTeam3
                     for (var lus = 0; lus < toeTeVoegenBabies; lus++)
                     {
                         var toeTeVoegenHerbivoor = new Herbivoor();
-                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);                        
+                        mijnMatrix.VoegItemToe(toeTeVoegenHerbivoor);
                     }
 
                     //planten ad random toegevoegd
@@ -180,9 +205,15 @@ namespace TerraTeam3
                     }
 
                 }
+            tijdOverschreden = false;
             }
-            while (input == "v");
+            while (input != "s");
+            
+            
         }
+
+        
+
     }
 }
 
