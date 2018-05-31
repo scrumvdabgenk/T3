@@ -127,6 +127,7 @@ namespace TerraTeam3
                     else
                     {
                         aTimer.Enabled = false;
+                        tijdOverschreden = false;
                         Console.WriteLine("De automatische modus werd gestopt");
                     }
                 }
