@@ -337,6 +337,8 @@ namespace TerraTeam3
                             schrijverMatrix.Serialize(bestand, laatsteMatrix.Items);
                         }
                         Console.WriteLine("Uw spel werd opgeslagen");
+                        Console.WriteLine("Duw op enter om verder te gaan");
+                        Console.Read();
                     }
                     catch (SerializationException)
                     {
@@ -365,6 +367,8 @@ namespace TerraTeam3
                             laatsteMatrix.Items = nieuweItems;
                             geefSituatieWeer(laatsteMatrix, "Opgeslagen spel:");
                         }
+                        Console.WriteLine("Duw op enter om verder te gaan");
+                        Console.Read();
                     }
                     catch (SerializationException)
                     {
