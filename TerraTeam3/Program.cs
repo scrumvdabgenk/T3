@@ -120,10 +120,15 @@ namespace TerraTeam3
                 {
                     input = ".";
                     if (aTimer.Enabled == false)
+                    {
                         aTimer.Enabled = true;
+                        Console.WriteLine("De automatische modus werd gestart");
+                    }
                     else
+                    {
                         aTimer.Enabled = false;
-
+                        Console.WriteLine("De automatische modus werd gestopt");
+                    }
                 }
 
                 if (input == "v" || tijdOverschreden)
@@ -383,7 +388,7 @@ namespace TerraTeam3
 
                 }
 
-                    tijdOverschreden = false;
+                tijdOverschreden = false;
             }
             while (input != "s");
         }
