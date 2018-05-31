@@ -22,8 +22,9 @@ namespace TerraTeam3
             aTimer = new Timer(2000);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
-            aTimer.Enabled = true;
+            aTimer.Enabled = false;
         }
+
         public static void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             tijdOverschreden = true;
@@ -31,7 +32,7 @@ namespace TerraTeam3
 
         static void Main(string[] args)
         {
-            Console.WindowHeight = 80;
+            Console.WindowHeight = 63;
 
             // Startwaardes
             Random rnd = new Random();
@@ -104,6 +105,7 @@ namespace TerraTeam3
                     Console.WriteLine("- s + enter om te stoppen");
                     Console.WriteLine("- o + enter om op te slaan");
                     Console.WriteLine("- l + enter om een opgeslagen spel te laden");
+                    Console.WriteLine("- t + enter om automatisch te spelen on / off");
                     while (!Console.KeyAvailable && !tijdOverschreden)
                     { }
                     if (!tijdOverschreden)
@@ -111,9 +113,18 @@ namespace TerraTeam3
                         input = Console.ReadLine();
                     }
                 }
-                while (input != "v" && input != "s" && input != "o" && input != "l" && !tijdOverschreden);
+                while (input != "v" && input != "s" && input != "o" && input != "l" && input != "t" && !tijdOverschreden);
 
                 Console.WriteLine();
+                if (input == "t")
+                {
+                    input = ".";
+                    if (aTimer.Enabled == false)
+                        aTimer.Enabled = true;
+                    else
+                        aTimer.Enabled = false;
+
+                }
 
                 if (input == "v" || tijdOverschreden)
                 {
