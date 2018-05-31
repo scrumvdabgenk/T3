@@ -19,7 +19,7 @@ namespace TerraTeam3
 
         public static void SetTimer()
         {
-            aTimer = new Timer(2000);
+            aTimer = new Timer(200);
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true;
             aTimer.Enabled = false;
@@ -32,7 +32,13 @@ namespace TerraTeam3
 
         static void Main(string[] args)
         {
-            Console.WindowHeight = 63;
+            Console.WindowWidth = 120;
+
+            ShowIntro();
+
+            Console.ReadKey();
+
+            Console.Clear();
 
             // Startwaardes
             Random rnd = new Random();
@@ -82,13 +88,13 @@ namespace TerraTeam3
 
             // Eerste weergave
             // De matrix van "gisteren" weergeven - Leeg in startsituatie
-            geefSituatieWeer(voorgaandeMatrix, "Vorige situatie:");
+            GeefSituatieWeer(voorgaandeMatrix, "Vorige situatie:");
 
             Console.WriteLine();
             Console.WriteLine();
 
             // De matrix van "vandaag" weergeven
-            geefSituatieWeer(laatsteMatrix, "Huidige situatie:");
+            GeefSituatieWeer(laatsteMatrix, "Huidige situatie:");
 
 
             string input = ".";
@@ -100,12 +106,14 @@ namespace TerraTeam3
                 {
 
                     Console.WriteLine();
-                    Console.WriteLine("Geef een commando:");
-                    Console.WriteLine("- v + enter om de volgende dag te zien");
-                    Console.WriteLine("- s + enter om te stoppen");
-                    Console.WriteLine("- o + enter om op te slaan");
-                    Console.WriteLine("- l + enter om een opgeslagen spel te laden");
-                    Console.WriteLine("- t + enter om automatisch te spelen on / off");
+                    Console.WriteLine("  Kies een commando:");
+                    Console.WriteLine();
+                    Console.WriteLine("   [ v + enter : Bekijk de volgende dag ]");
+                    Console.WriteLine("   [ s + enter : Stoppen ]");
+                    Console.WriteLine("   [ o + enter : Spel opslaan ]");
+                    Console.WriteLine("   [ l + enter : Opgeslagen spel laden ]");
+                    Console.WriteLine("   [ t + enter : Automatisch mode starten/stoppen ]");
+
                     while (!Console.KeyAvailable && !tijdOverschreden)
                     { }
                     if (!tijdOverschreden)
@@ -138,7 +146,7 @@ namespace TerraTeam3
                     Console.Clear();
 
                     // Matrix van gisteren weergeven
-                    geefSituatieWeer(laatsteMatrix, "Vorige situatie:");
+                    GeefSituatieWeer(laatsteMatrix, "Vorige situatie:");
 
                     var gesorteerdeMatrix = laatsteMatrix.GeefGesorteerdeLijst();
                     int toeTeVoegenHerbivorenBabies = 0;
@@ -328,7 +336,7 @@ namespace TerraTeam3
                     Console.WriteLine();
                     Console.WriteLine();
                     // De matrix van "vandaag" weergeven
-                    geefSituatieWeer(laatsteMatrix, "Huidige situatie:");
+                    GeefSituatieWeer(laatsteMatrix, "Huidige situatie:");
                 }
 
                 if (input == "o")
@@ -371,7 +379,7 @@ namespace TerraTeam3
                             List<MatrixItem> nieuweItems;
                             nieuweItems = (List<MatrixItem>)lezerMatrix.Deserialize(bestand);
                             laatsteMatrix.Items = nieuweItems;
-                            geefSituatieWeer(laatsteMatrix, "Opgeslagen spel:");
+                            GeefSituatieWeer(laatsteMatrix, "Opgeslagen spel:");
                         }
                         Console.WriteLine("Duw op enter om verder te gaan");
                         Console.Read();
@@ -395,13 +403,86 @@ namespace TerraTeam3
         }
 
         // Method om Matrix weer te geven
-        public static void geefSituatieWeer(Matrix mijnMatrix, string titel)
+        public static void GeefSituatieWeer(Matrix mijnMatrix, string titel)
         {
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(titel);
             Console.WriteLine();
             mijnMatrix.GeefWeer();
         }
+
+
+        public static void ShowIntro()
+        {
+            Console.WindowWidth = 110;
+
+
+            string text = System.IO.File.ReadAllText(@"intro1.txt");
+
+            for (int i = 0; i < text.Length; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+                if (text[i] == '@')
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                Console.Write(text[i]);
+            }
+
+            Console.WriteLine();
+
+
+
+            string text2 = System.IO.File.ReadAllText(@"intro2.txt");
+
+            for (int i = 0; i < text2.Length; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+
+                if (text2[i] == '╝' || text2[i] == '═' || text2[i] == '║' || text2[i] == '╗' || text2[i] == '╚' || text2[i] == '╔')
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                }
+                Console.Write(text2[i]);
+            }
+
+            Console.WriteLine();
+
+
+
+            string text3 = System.IO.File.ReadAllText(@"intro3.txt");
+
+            for (int i = 0; i < text3.Length; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+
+                if (text3[i] == '╝' || text3[i] == '═' || text3[i] == '║' || text3[i] == '╗' || text3[i] == '╚' || text3[i] == '╔')
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                Console.Write(text3[i]);
+            }
+
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write("                                 [ DRUK OP EEN ");
+
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            Console.Write("TOETS");
+
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.Write(" OM VERDER TE GAAN ]");
+            Console.WriteLine();
+            Console.WriteLine();
+        }
+
     }
 }
 

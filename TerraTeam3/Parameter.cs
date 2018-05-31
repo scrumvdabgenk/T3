@@ -45,8 +45,7 @@ namespace TerraTeam3
         {
             get
             {
-                return 1;
-                // return rnd.Next(1, MaxAantalHerbivorenStart);
+                return rnd.Next(1, MaxAantalHerbivorenStart);
             }
         }
 
@@ -54,8 +53,7 @@ namespace TerraTeam3
         {
             get
             {
-                return 5;
-                // return rnd.Next(1, MaxAantalCarnivorenStart);
+                return rnd.Next(1, MaxAantalCarnivorenStart);
             }
         }
 
@@ -63,8 +61,7 @@ namespace TerraTeam3
         {
             get
             {
-                //   return rnd.Next(1, MaxAantalMensenStart);
-                return 5;
+                return rnd.Next(1, MaxAantalMensenStart);
             }
         }
 
@@ -76,7 +73,7 @@ namespace TerraTeam3
             }
         }
 
-        public static int MinAantalLeeg {get;set;}
+        public static int MinAantalLeeg { get; set; }
 
         static Parameter()
         {
